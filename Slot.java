@@ -22,7 +22,6 @@ public class Slot {
             return true;
         } else {
             if (items[0].getName() != item.getName()) {
-                System.out.println("Slot is not empty");
                 return false;
             } else {
                 if (numItems < itemLimit) {
@@ -30,10 +29,17 @@ public class Slot {
                     numItems++;
                     return true;
                 } else {
-                    System.out.println("Slot is full");
                     return false;
                 }
             }
+        }
+    }
+
+    public Item checkSlot() {
+        if (numItems == 0) {
+            return null;
+        } else {
+            return items[0];
         }
     }
 
@@ -52,10 +58,14 @@ public class Slot {
 
     public Item getItems() {
         if (numItems == 0) {
-            System.out.println("No items in slot");
             return null;
         } else {
             return items[0];
         }
     }
+
+    public int getNumItems() {
+        return numItems;
+    }
+
 }
