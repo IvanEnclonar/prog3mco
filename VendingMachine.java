@@ -14,7 +14,6 @@ public class VendingMachine {
     }
 
     public boolean addItem(Item item) {
-        // TODO - add item to the first available slot
         for (int i = 0; i < slots.length; i++) {
             if (slots[i].addItem(item)) {
                 return true;
@@ -35,10 +34,17 @@ public class VendingMachine {
         }
     }
 
-    public boolean receivePayment(float amount) {
-        // TODO - return true if payment is accepted
+    public Item buyItem(int slotNum) {
+        // TODO - return the item in the slot if it exists
+        if (slots[slotNum - 1].getNumItems() > 0) {
+            return slots[slotNum - 1].removeItem();
+        } else {
+            return null;
+        }
+    }
 
-        return false;
+    public int insertMoney() {
+
     }
 
 }
