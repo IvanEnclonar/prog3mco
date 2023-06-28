@@ -43,6 +43,22 @@ public class Slot {
         }
     }
 
+    public String getItemName() {
+        if (numItems == 0) {
+            return "Empty";
+        } else {
+            return items[0].getName();
+        }
+    }
+
+    public String getPrice() {
+        if (numItems == 0) {
+            return "0";
+        } else {
+            return Float.toString(items[0].getPrice());
+        }
+    }
+
     public Item removeItem() {
         // TODO - might return the first item in the slot, instead of the last item
         if (numItems > 0) {
