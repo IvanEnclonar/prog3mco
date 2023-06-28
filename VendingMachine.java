@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class VendingMachine {
     Slot slots[] = new Slot[9];
     float money = 0;
+    MoneyBox mb = new MoneyBox();
 
     public VendingMachine(Item inItems[], int n) {
         // Initialize slots
