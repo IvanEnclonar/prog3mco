@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class VendingMachine {
     Slot slots[] = new Slot[9];
+    MoneyBox mb = new MoneyBox();
     float money = 0;
 
     public VendingMachine(Item inItems[], int n) {
@@ -31,10 +32,12 @@ public class VendingMachine {
                 System.out.println("\n+-----------------+-----------------+-----------------+");
             }
             System.out.println("|                 |                 |                 |");
-            System.out.println("|" + String.format("%-" + 17 + "s", slots[i].getItemName()) + "|"
-                    + String.format("%-" + 17 + "s", slots[i + 1].getItemName()) + "|"
-                    + String.format("%-" + 17 + "s", slots[i + 2].getItemName()) + "|");
-            System.out.println("|                 |                 |                 |");
+            System.out.println("| " + String.format("%-" + 16 + "s", slots[i].getItemName()) + "| "
+                    + String.format("%-" + 16 + "s", slots[i + 1].getItemName()) + "| "
+                    + String.format("%-" + 16 + "s", slots[i + 2].getItemName()) + "|");
+            System.out.println("| " + String.format("%-" + 16 + "s", slots[i].getCalories()) + "| "
+                    + String.format("%-" + 16 + "s", slots[i + 1].getCalories()) + "| "
+                    + String.format("%-" + 16 + "s", slots[i + 2].getCalories()) + "|");
             System.out.println("+-----------------+-----------------+-----------------+");
             System.out.println("| [" + (i + 1) + "] Php " + String.format("%-" + 8 + "s", slots[i].getPrice()) + "| ["
                     + (i + 2)
@@ -52,6 +55,7 @@ public class VendingMachine {
         } catch (Exception e) {
             System.out.println("Invalid input");
         }
+        sc.close();
         return num;
     }
 
@@ -137,6 +141,7 @@ public class VendingMachine {
                     System.out.println(temp + " is an invalid denomination.");
             }
         }
+        sc.close();
         return totalInp;
     }
 

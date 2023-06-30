@@ -13,14 +13,7 @@ public class Driver {
         items[8] = new Item("Coke", 50f, 140);
         items[9] = new Item("Powerade", 100f, 140);
 
-        // Create a vending machine with 8 slots
         VendingMachine vm = new VendingMachine(items, 10);
         vm.menu();
-        // System.out.println("+-----------------+-----------------+-----------------+");
-        // System.out.println("| | | |");
-        // System.out.println("| Coke | Diet Coke | Sprite |");
-        // System.out.println("| [1] |[2] Php 150 | |");
-        // System.out.println("+------------+------------+------------+");
-        // }
     }
 }

@@ -80,6 +80,14 @@ public class Slot {
         }
     }
 
+    public String getCalories() {
+        if (numItems == 0) {
+            return "";
+        } else {
+            return Float.toString(items[0].getCalories()) + " cal";
+        }
+    }
+
     public int getNumItems() {
         return numItems;
     }
