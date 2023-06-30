@@ -123,13 +123,29 @@ public class VendingMachine {
             temp = Integer.parseInt(moneyArr[i]);
             switch (temp) {
                 case 1:
+                    totalInp = totalInp + temp;
+                    break;
                 case 5:
+                    totalInp = totalInp + temp;
+                    break;
                 case 10:
+                    totalInp = totalInp + temp;
+                    break;
                 case 20:
+                    totalInp = totalInp + temp;
+                    break;
                 case 50:
+                    totalInp = totalInp + temp;
+                    break;
                 case 100:
+                    totalInp = totalInp + temp;
+                    break;
                 case 200:
+                    totalInp = totalInp + temp;
+                    break;
                 case 500:
+                    totalInp = totalInp + temp;
+                    break;
                 case 1000:
                     totalInp = totalInp + temp;
                     break;
