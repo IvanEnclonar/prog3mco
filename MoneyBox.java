@@ -113,4 +113,16 @@ public class MoneyBox{
                 break;
         }
     }
+
+    public int[] getBillCount {
+        return bills;
+    }
+
+    public int[] getCoinCount {
+        return coins;
+    }
+
+    public int[] getChange {
+        return change;
+    }
 }
