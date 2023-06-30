@@ -4,6 +4,7 @@ public class VendingMachine {
     Slot slots[] = new Slot[9];
     MoneyBox mb = new MoneyBox();
     float money = 0;
+    MoneyBox box = new MoneyBox();
 
     public VendingMachine(Item inItems[], int n) {
         // Initialize slots
@@ -127,14 +128,39 @@ public class VendingMachine {
             temp = Integer.parseInt(moneyArr[i]);
             switch (temp) {
                 case 1:
+                    box.addCoin(1);
+                    totalInp = totalInp + temp;
+                    break;
                 case 5:
+                    box.addCoin(5);
+                    totalInp = totalInp + temp;
+                    break;
                 case 10:
+                    box.addCoin(10);
+                    totalInp = totalInp + temp;
+                    break;
                 case 20:
+                    box.addCoin(20);
+                    totalInp = totalInp + temp;
+                    break;
                 case 50:
+                    box.addBill(50);
+                    totalInp = totalInp + temp;
+                    break;
                 case 100:
+                    box.addBill(100);
+                    totalInp = totalInp + temp;
+                    break;
                 case 200:
+                    box.addBill(200);
+                    totalInp = totalInp + temp;
+                    break;
                 case 500:
+                    box.addBill(500);
+                    totalInp = totalInp + temp;
+                    break;
                 case 1000:
+                    box.addBill(1000);
                     totalInp = totalInp + temp;
                     break;
                 default:

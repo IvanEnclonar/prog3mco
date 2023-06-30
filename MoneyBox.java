@@ -113,4 +113,57 @@ public class MoneyBox{
                 break;
         }
     }
+
+    public int[] getBillCount {
+        return bills;
+    }
+
+    public int[] getCoinCount {
+        return coins;
+    }
+
+    public int[] getChange {
+        return change;
+    }
+
+    public void addBill(int bill){
+        switch (bill){
+            case 20:
+                this.bills[0] = this.bills[0] + 1;
+                break;
+            case 50:
+                this.bills[1] = this.bills[1] + 1;
+                break;
+            case 100:
+                this.bills[2] = this.bills[2] + 1;
+                break;
+            case 200:
+                this.bills[3] = this.bills[3] + 1;
+                break;
+            case 500:
+                this.bills[4] = this.bills[4] + 1;
+                break;
+            case 1000:
+                this.bills[5] = this.bills[5] + 1;
+                break;
+        }
+    }
+
+    public void addCoin(int coin){
+        switch (coin){
+            case 1:
+                this.coins[0] = this.coins[0] + 1;
+                break;
+            case 5:
+                this.coins[1] = this.coins[1] + 1;
+                break;
+            case 10:
+                this.coins[2] = this.coins[2] + 1;
+                break;
+            case 20:
+                this.coins[3] = this.coins[3] + 1;
+                break;
+        }
+    }
+    
 }
