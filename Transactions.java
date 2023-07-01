@@ -22,7 +22,7 @@ public class Transactions {
      * @param item The item to be added to the transactions list
      */
     public void recordTransaction(Item item) {
-        items.add(item);
+        items.add(new Item(item.getName(), item.getPrice(), item.getCalories()));
     }
 
     /**
@@ -57,9 +57,9 @@ public class Transactions {
      */
     public int countSales(String name) {
         int count = 0;
-        for (Item item : items) {
-            if (item.getName().equals(name)) {
-                count += item.getPrice();
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).getName().equals(name)) {
+                count += items.get(i).getPrice();
             }
         }
         return count;
