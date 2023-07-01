@@ -80,17 +80,8 @@ public class VendingMachine {
                     System.out.print("Enter slot number: ");
                     int slotNum = sc.nextInt();
                     if (slotNum > 0 && slotNum <= 9) {
-                        Item item = buyItem(slotNum);
-                        if (item != null && box.haveChange(item.getPrice())) {
-                            System.out.println("\nYou bought " + item.getName());
-                            box.dispenseChange();
-                            System.out.println("\nTotal money dispensed: Php " + money + "\n");
-                        } else {
-                            if (!box.haveChange(item.getPrice())) {
-                                System.out.println("No change available in the machine. ");
-                            } else
-                                System.out.println("Item not available. ");
-                        }
+                        buyItem(slotNum);
+
                     } else {
                         System.out.println("Invalid slot number");
                     }
@@ -268,18 +259,28 @@ public class VendingMachine {
         }
     }
 
-    public Item buyItem(int slotNum) {
+    public boolean buyItem(int slotNum) {
+
         if (slots[slotNum - 1].checkSlot() != null) {
-            if (money > slots[slotNum - 1].checkSlot().getPrice()) {
+            // Check if there is sufficient money
+            if (money < slots[slotNum - 1].checkSlot().getPrice()) {
+                System.out.println("Insufficient money");
+                return false;
+            } else if (box.haveChange(slots[slotNum - 1].checkSlot().getPrice())) {
+                System.out.println("You bought " + slots[slotNum - 1].checkSlot().getName());
                 money = money - slots[slotNum - 1].checkSlot().getPrice();
                 transactions.recordTransaction(slots[slotNum - 1].checkSlot());
-                return slots[slotNum - 1].removeItem();
+                box.dispenseChange();
+                System.out.println("Total money dispensed: Php " + money);
+                slots[slotNum - 1].removeItem();
+                return true;
             } else {
-                System.out.println("Insufficient funds");
-                return null;
+                System.out.println("No change available in the machine. ");
+                return false;
             }
         } else {
-            return null;
+            System.out.println("Item not available");
+            return false;
         }
     }
 
