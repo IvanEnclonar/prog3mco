@@ -35,6 +35,12 @@ public class Slot {
         }
     }
 
+    public void setItemsPrice(int price) {
+        for (int i = 0; i < numItems; i++) {
+            items[i].setPrice(price);
+        }
+    }
+
     public Item checkSlot() {
         if (numItems == 0) {
             return null;
@@ -77,6 +83,14 @@ public class Slot {
             return null;
         } else {
             return items[0];
+        }
+    }
+
+    public String getCalories() {
+        if (numItems == 0) {
+            return "";
+        } else {
+            return Float.toString(items[0].getCalories()) + " cal";
         }
     }
 

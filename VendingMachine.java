@@ -1,8 +1,9 @@
+import java.lang.invoke.SwitchPoint;
 import java.util.Scanner;
 
 public class VendingMachine {
-    Slot slots[] = new Slot[9];
-    float money = 0;
+    Slot[] slots = new Slot[9];
+    int money = 0;
     MoneyBox box = new MoneyBox();
 
     public VendingMachine(Item inItems[], int n) {
@@ -17,6 +18,12 @@ public class VendingMachine {
         }
     }
 
+    public VendingMachine() {
+        for (int i = 0; i < slots.length; i++) {
+            slots[i] = new Slot();
+        }
+    }
+
     public boolean addItem(Item item) {
         for (int i = 0; i < slots.length; i++) {
             if (slots[i].addItem(item)) {
@@ -27,15 +34,18 @@ public class VendingMachine {
     }
 
     public void displayContent() {
+
         for (int i = 0; i < slots.length; i += 3) {
             if (i == 0) {
                 System.out.println("\n+-----------------+-----------------+-----------------+");
             }
             System.out.println("|                 |                 |                 |");
-            System.out.println("|" + String.format("%-" + 17 + "s", slots[i].getItemName()) + "|"
-                    + String.format("%-" + 17 + "s", slots[i + 1].getItemName()) + "|"
-                    + String.format("%-" + 17 + "s", slots[i + 2].getItemName()) + "|");
-            System.out.println("|                 |                 |                 |");
+            System.out.println("| " + String.format("%-" + 16 + "s", slots[i].getItemName()) + "| "
+                    + String.format("%-" + 16 + "s", slots[i + 1].getItemName()) + "| "
+                    + String.format("%-" + 16 + "s", slots[i + 2].getItemName()) + "|");
+            System.out.println("| " + String.format("%-" + 16 + "s", slots[i].getCalories()) + "| "
+                    + String.format("%-" + 16 + "s", slots[i + 1].getCalories()) + "| "
+                    + String.format("%-" + 16 + "s", slots[i + 2].getCalories()) + "|");
             System.out.println("+-----------------+-----------------+-----------------+");
             System.out.println("| [" + (i + 1) + "] Php " + String.format("%-" + 8 + "s", slots[i].getPrice()) + "| ["
                     + (i + 2)
@@ -45,40 +55,50 @@ public class VendingMachine {
         }
     }
 
-    private int getNumInput() {
-        Scanner sc = new Scanner(System.in);
-        int num = 0;
-        try {
-            num = sc.nextInt();
-        } catch (Exception e) {
-            System.out.println("Invalid input");
-        }
-        return num;
-    }
+    /*
+     * private int getNumInput() {
+     * Scanner sc = new Scanner(System.in);
+     * int num = 0;
+     * try {
+     * num = sc.nextInt();
+     * } catch (Exception e) {
+     * System.out.println("Invalid input");
+     * }
+     * sc.close();
+     * return num;
+     * }
+     */
 
-    public void menu() {
+    public void menu(Scanner sc) {
         int choice;
         do {
             displayContent();
+            money = box.getTotalUserMoney();
             System.out.println("\nMoney: Php " + money);
             System.out.println("[1] Insert money");
             System.out.println("[2] Buy item");
             System.out.println("[0] Exit");
             System.out.print("Enter choice: ");
-            choice = getNumInput();
+            choice = sc.nextInt();
             switch (choice) {
                 case 1:
-                    money = money + insertMoney();
+                    box.insertMoney(sc);
+                    money = box.getTotalUserMoney();
                     break;
                 case 2:
                     System.out.print("Enter slot number: ");
-                    int slotNum = getNumInput();
+                    int slotNum = sc.nextInt();
                     if (slotNum > 0 && slotNum <= 9) {
                         Item item = buyItem(slotNum);
-                        if (item != null) {
+                        if (item != null && box.haveChange(item.getPrice())) {
                             System.out.println("\nYou bought " + item.getName());
+                            box.dispenseChange();
+                            System.out.println("\nTotal money dispensed: Php " + money + "\n");
                         } else {
-                            System.out.println("Item not available");
+                            if (!box.haveChange(item.getPrice())) {
+                                System.out.println("No change available in the machine. ");
+                            } else
+                                System.out.println("Item not available. ");
                         }
                     } else {
                         System.out.println("Invalid slot number");
@@ -86,14 +106,175 @@ public class VendingMachine {
                     break;
                 case 0:
                     if (money > 0) {
-                        System.out.println("Change: Php " + money);
+                        if (box.haveChange(0))
+                            box.dispenseChange();
+                        System.out.println("\nTotal money dispensed: Php " + money + "\n");
                     }
+                    System.out.println();
                     break;
                 default:
                     System.out.println("Invalid choice");
             }
         } while (choice != 0);
 
+    }
+
+    public void changePrice(Scanner sc) {
+        String name = "";
+        int price;
+        System.out.println("Choose which item to change price: ");
+        printSetItemList();
+        System.out.print("Choice: ");
+        int choice = sc.nextInt();
+        switch (choice) {
+            case 1:
+                name = "Coke";
+                break;
+            case 2:
+                name = "Sprite";
+                break;
+            case 3:
+                name = "Royal";
+                break;
+            case 4:
+                name = "Diet Coke";
+                break;
+            case 5:
+                name = "Cheese Burger";
+                break;
+            case 6:
+                name = "Chicken Burger";
+                break;
+            case 7:
+                name = "Bacon Burger";
+                break;
+            case 8:
+                name = "Fries";
+                break;
+            case 9:
+                name = "Sundae";
+                break;
+            default:
+                System.out.println("Invalid choice");
+                break;
+        }
+        if (!name.equals("")) {
+            System.out.print("Enter new price: ");
+            price = sc.nextInt();
+            for (int i = 0; i < slots.length; i++) {
+                if (slots[i].getItemName().equals(name)) {
+                    slots[i].setItemsPrice(price);
+                }
+            }
+        }
+        // item.setPrice(price);
+    }
+
+    public void printSetItemList() {
+        System.out.println("[1] Coke");
+        System.out.println("[2] Sprite");
+        System.out.println("[3] Royal");
+        System.out.println("[4] Diet Coke");
+        System.out.println("[5] Cheese Burger");
+        System.out.println("[6] Chicken Burger");
+        System.out.println("[7] Bacon Burger");
+        System.out.println("[8] Fries");
+        System.out.println("[9] Sundae");
+    }
+
+    public void restockItems(Scanner sc) {
+        System.out.println("\nChoose which item to restock: ");
+        printSetItemList();
+        System.out.print("Choice: ");
+        int choice = sc.nextInt();
+        System.out.print("Enter quantity: ");
+        int quantity = sc.nextInt();
+
+        switch (choice) {
+            case 1:
+                Item coke = new Item("Coke", 50, 140);
+                for (int i = 0; i < quantity; i++) {
+                    if (!addItem(coke)) {
+                        System.out.println("Slot for coke is full!");
+                        break;
+                    }
+                }
+                break;
+            case 2:
+                Item sprite = new Item("Sprite", 45, 50);
+                for (int i = 0; i < quantity; i++) {
+                    if (!addItem(sprite)) {
+                        System.out.println("Slot for sprite is full!");
+                        break;
+                    }
+                }
+                break;
+            case 3:
+                Item royal = new Item("Royal", 40, 100);
+                for (int i = 0; i < quantity; i++) {
+                    if (!addItem(royal)) {
+                        System.out.println("Slot for royal is full!");
+                        break;
+                    }
+                }
+                break;
+            case 4:
+                Item dietCoke = new Item("Diet Coke", 60, 0);
+                for (int i = 0; i < quantity; i++) {
+                    if (!addItem(dietCoke)) {
+                        System.out.println("Slot for diet coke is full!");
+                        break;
+                    }
+                }
+                break;
+            case 5:
+                Item cheeseBurger = new Item("Cheese Burger", 80, 300);
+                for (int i = 0; i < quantity; i++) {
+                    if (!addItem(cheeseBurger)) {
+                        System.out.println("Slot for cheese burger is full!");
+                        break;
+                    }
+                }
+                break;
+            case 6:
+                Item chickenBurger = new Item("Chicken Burger", 90, 350);
+                for (int i = 0; i < quantity; i++) {
+                    if (!addItem(chickenBurger)) {
+                        System.out.println("Slot for chicken burger is full!");
+                        break;
+                    }
+                }
+                break;
+            case 7:
+                Item baconBurger = new Item("Bacon Burger", 100, 400);
+                for (int i = 0; i < quantity; i++) {
+                    if (!addItem(baconBurger)) {
+                        System.out.println("Slot for bacon burger is full!");
+                        break;
+                    }
+                }
+                break;
+            case 8:
+                Item fries = new Item("Fries", 50, 200);
+                for (int i = 0; i < quantity; i++) {
+                    if (!addItem(fries)) {
+                        System.out.println("Slot for fries is full!");
+                        break;
+                    }
+                }
+                break;
+            case 9:
+                Item sundae = new Item("Sundae", 60, 250);
+                for (int i = 0; i < quantity; i++) {
+                    if (!addItem(sundae)) {
+                        System.out.println("Slot for sundae is full!");
+                        break;
+                    }
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     public Item buyItem(int slotNum) {
@@ -110,60 +291,51 @@ public class VendingMachine {
         }
     }
 
-    public int insertMoney() {
-        Scanner sc = new Scanner(System.in);
-        int totalInp = 0;
-        int temp = 0;
+    public void maintenance(Scanner sc) {
+        int choice = 0;
+        boolean exit = false;
 
-        System.out.print("Insert money (1 5 10 20 50 100): ");
-        String moneyInp = sc.nextLine();
+        while (!exit) {
+            System.out.println("\nMAINTENANCE ONGOING");
+            System.out.println("[1] Restock Item");
+            System.out.println("[2] Change Item Price");
+            System.out.println("[3] Replenish Money");
+            System.out.println("[4] Collect Money");
+            System.out.println("[0] Exit");
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
 
-        String[] moneyArr = moneyInp.split(" ");
-
-        for (int i = 0; i < moneyArr.length; i++) {
-            temp = Integer.parseInt(moneyArr[i]);
-            switch (temp) {
+            switch (choice) {
                 case 1:
-                    box.addCoin(1);
-                    totalInp = totalInp + temp;
+                    restockItems(sc);
                     break;
-                case 5:
-                    box.addCoin(5);
-                    totalInp = totalInp + temp;
+                case 2:
+                    changePrice(sc);
                     break;
-                case 10:
-                    box.addCoin(10);
-                    totalInp = totalInp + temp;
+                case 3:
+                    box.displayBoxContents();
+                    if (box.replenishMoney(sc)) {
+                        System.out.println("Denomination replenished.");
+                    } else {
+                        System.out.println("Error in replenishing money. Please try again.");
+                    }
                     break;
-                case 20:
-                    box.addCoin(20);
-                    totalInp = totalInp + temp;
+                case 4:
+                    box.displayBoxContents();
+                    if (box.collectMoney()) {
+                        System.out.println("Money collected.");
+                    } else {
+                        System.out.println("Error in collecting money.");
+                    }
                     break;
-                case 50:
-                    box.addBill(50);
-                    totalInp = totalInp + temp;
-                    break;
-                case 100:
-                    box.addBill(100);
-                    totalInp = totalInp + temp;
-                    break;
-                case 200:
-                    box.addBill(200);
-                    totalInp = totalInp + temp;
-                    break;
-                case 500:
-                    box.addBill(500);
-                    totalInp = totalInp + temp;
-                    break;
-                case 1000:
-                    box.addBill(1000);
-                    totalInp = totalInp + temp;
+                case 0:
+                    System.out.println();
+                    exit = true;
                     break;
                 default:
-                    System.out.println(temp + " is an invalid denomination.");
+                    System.out.println("Invalid choice");
+
             }
         }
-        return totalInp;
     }
-
 }
