@@ -35,6 +35,12 @@ public class Slot {
         }
     }
 
+    public void setItemsPrice(int price) {
+        for (int i = 0; i < numItems; i++) {
+            items[i].setPrice(price);
+        }
+    }
+
     public Item checkSlot() {
         if (numItems == 0) {
             return null;

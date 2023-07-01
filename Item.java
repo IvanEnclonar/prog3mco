@@ -1,13 +1,17 @@
 public class Item {
     private String name;
-    private float price;
+    private int price;
     private float calories;
 
     // Constructor
-    public Item(String name, float price, float calories) {
+    public Item(String name, int price, float calories) {
         this.name = name;
         this.price = price;
         this.calories = calories;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     // Getter Functions
@@ -15,7 +19,7 @@ public class Item {
         return name;
     }
 
-    public float getPrice() {
+    public int getPrice() {
         return price;
     }
 
