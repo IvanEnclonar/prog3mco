@@ -1,3 +1,6 @@
+/**
+ * Represents an item in the menu
+ */
 public class Item {
     private String name;
     private int price;

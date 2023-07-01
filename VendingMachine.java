@@ -5,18 +5,10 @@ public class VendingMachine {
     Slot[] slots = new Slot[9];
     int money = 0;
     MoneyBox box = new MoneyBox();
-
-    public VendingMachine(Item inItems[], int n) {
-        // Initialize slots
-        for (int i = 0; i < slots.length; i++) {
-            slots[i] = new Slot();
-        }
-        for (int i = 0; i < n; i++) {
-            if (!addItem(inItems[i])) {
-                System.out.println("Vending Machine is full");
-            }
-        }
-    }
+    Transactions transactions = new Transactions();
+    String itemNamesList[] = { "Coke", "Sprite", "Royal", "Diet Coke", "Cheese Burger", "Chicken Burger",
+            "Bacon Burger",
+            "Fries", "Sundae" };
 
     public VendingMachine() {
         for (int i = 0; i < slots.length; i++) {
@@ -24,13 +16,12 @@ public class VendingMachine {
         }
     }
 
-    public boolean addItem(Item item) {
-        for (int i = 0; i < slots.length; i++) {
-            if (slots[i].addItem(item)) {
-                return true;
-            }
+    public boolean addItem(Item item, int slotNum) {
+        if (slots[slotNum].addItem(item)) {
+            return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     public void displayContent() {
@@ -194,7 +185,7 @@ public class VendingMachine {
             case 1:
                 Item coke = new Item("Coke", 50, 140);
                 for (int i = 0; i < quantity; i++) {
-                    if (!addItem(coke)) {
+                    if (!addItem(coke, 0)) {
                         System.out.println("Slot for coke is full!");
                         break;
                     }
@@ -203,7 +194,7 @@ public class VendingMachine {
             case 2:
                 Item sprite = new Item("Sprite", 45, 50);
                 for (int i = 0; i < quantity; i++) {
-                    if (!addItem(sprite)) {
+                    if (!addItem(sprite, 1)) {
                         System.out.println("Slot for sprite is full!");
                         break;
                     }
@@ -212,7 +203,7 @@ public class VendingMachine {
             case 3:
                 Item royal = new Item("Royal", 40, 100);
                 for (int i = 0; i < quantity; i++) {
-                    if (!addItem(royal)) {
+                    if (!addItem(royal, 2)) {
                         System.out.println("Slot for royal is full!");
                         break;
                     }
@@ -221,7 +212,7 @@ public class VendingMachine {
             case 4:
                 Item dietCoke = new Item("Diet Coke", 60, 0);
                 for (int i = 0; i < quantity; i++) {
-                    if (!addItem(dietCoke)) {
+                    if (!addItem(dietCoke, 3)) {
                         System.out.println("Slot for diet coke is full!");
                         break;
                     }
@@ -230,7 +221,7 @@ public class VendingMachine {
             case 5:
                 Item cheeseBurger = new Item("Cheese Burger", 80, 300);
                 for (int i = 0; i < quantity; i++) {
-                    if (!addItem(cheeseBurger)) {
+                    if (!addItem(cheeseBurger, 4)) {
                         System.out.println("Slot for cheese burger is full!");
                         break;
                     }
@@ -239,7 +230,7 @@ public class VendingMachine {
             case 6:
                 Item chickenBurger = new Item("Chicken Burger", 90, 350);
                 for (int i = 0; i < quantity; i++) {
-                    if (!addItem(chickenBurger)) {
+                    if (!addItem(chickenBurger, 5)) {
                         System.out.println("Slot for chicken burger is full!");
                         break;
                     }
@@ -248,7 +239,7 @@ public class VendingMachine {
             case 7:
                 Item baconBurger = new Item("Bacon Burger", 100, 400);
                 for (int i = 0; i < quantity; i++) {
-                    if (!addItem(baconBurger)) {
+                    if (!addItem(baconBurger, 6)) {
                         System.out.println("Slot for bacon burger is full!");
                         break;
                     }
@@ -257,7 +248,7 @@ public class VendingMachine {
             case 8:
                 Item fries = new Item("Fries", 50, 200);
                 for (int i = 0; i < quantity; i++) {
-                    if (!addItem(fries)) {
+                    if (!addItem(fries, 7)) {
                         System.out.println("Slot for fries is full!");
                         break;
                     }
@@ -266,7 +257,7 @@ public class VendingMachine {
             case 9:
                 Item sundae = new Item("Sundae", 60, 250);
                 for (int i = 0; i < quantity; i++) {
-                    if (!addItem(sundae)) {
+                    if (!addItem(sundae, 8)) {
                         System.out.println("Slot for sundae is full!");
                         break;
                     }
@@ -281,6 +272,7 @@ public class VendingMachine {
         if (slots[slotNum - 1].checkSlot() != null) {
             if (money > slots[slotNum - 1].checkSlot().getPrice()) {
                 money = money - slots[slotNum - 1].checkSlot().getPrice();
+                transactions.recordTransaction(slots[slotNum - 1].checkSlot());
                 return slots[slotNum - 1].removeItem();
             } else {
                 System.out.println("Insufficient funds");
@@ -291,9 +283,35 @@ public class VendingMachine {
         }
     }
 
+    public void displayTransactions() {
+        System.out.println("\nTRANSACTIONS");
+        System.out.println("+-----------------------------------------------------------+");
+        System.out.println("|   Item Name   | Initital | Remaining | Sold | Total Sales |");
+        System.out.println("+-----------------------------------------------------------+");
+
+        for (int i = 0; i < 9; i++) {
+            System.out.print("|");
+            System.out.print(String.format("%15s", itemNamesList[i]));
+            System.out.print("|");
+            System.out
+                    .print(String.format("%10s", (slots[i].getNumItems() + transactions.countItem(itemNamesList[i]))));
+            System.out.print("|");
+            System.out.print(String.format("%11s", slots[i].getNumItems()));
+            System.out.print("|");
+            System.out.print(String.format("%6s", transactions.countItem(itemNamesList[i])));
+            System.out.print("|");
+            System.out.print(
+                    String.format("%13s", "Php " + transactions.countSales(itemNamesList[i])));
+            System.out.print("|\n");
+        }
+        System.out.println("+-----------------------------------------------------------+");
+
+    }
+
     public void maintenance(Scanner sc) {
         int choice = 0;
         boolean exit = false;
+        boolean didRestock = false;
 
         while (!exit) {
             System.out.println("\nMAINTENANCE ONGOING");
@@ -301,12 +319,14 @@ public class VendingMachine {
             System.out.println("[2] Change Item Price");
             System.out.println("[3] Replenish Money");
             System.out.println("[4] Collect Money");
+            System.out.println("[5] Display Transactions");
             System.out.println("[0] Exit");
             System.out.print("Enter choice: ");
             choice = sc.nextInt();
 
             switch (choice) {
                 case 1:
+                    didRestock = true;
                     restockItems(sc);
                     break;
                 case 2:
@@ -328,7 +348,14 @@ public class VendingMachine {
                         System.out.println("Error in collecting money.");
                     }
                     break;
+                case 5:
+                    displayTransactions();
+                    break;
                 case 0:
+                    if (didRestock) {
+                        transactions.clearTransactions();
+                        System.out.println("Transactions history cleared.");
+                    }
                     System.out.println();
                     exit = true;
                     break;
