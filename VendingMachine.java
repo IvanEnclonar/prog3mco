@@ -1,21 +1,39 @@
-import java.lang.invoke.SwitchPoint;
 import java.util.Scanner;
 
+/**
+ * This class is used to create a vending machine object. It simulates a vending
+ * machine in real life and allows the user to add items to the machine, add
+ * money to the machine, and purchase items from the machine.
+ */
 public class VendingMachine {
+    // Instance variables
     Slot[] slots = new Slot[9];
     int money = 0;
     MoneyBox box = new MoneyBox();
     Transactions transactions = new Transactions();
+    // List of set items
     String itemNamesList[] = { "Coke", "Sprite", "Royal", "Diet Coke", "Cheese Burger", "Chicken Burger",
             "Bacon Burger",
             "Fries", "Sundae" };
 
+    /**
+     * Constructor for VendingMachine. It initializes the slots array.
+     */
     public VendingMachine() {
         for (int i = 0; i < slots.length; i++) {
             slots[i] = new Slot();
         }
     }
 
+    /**
+     * This method is used to add items to the vending machine. It takes in an item,
+     * and a slot number to add the item to the slots array. It returns true if the
+     * item was added successfully, and false if the item was not added.
+     * 
+     * @param item    item to be added
+     * @param slotNum slot number to add the item to
+     * @return true if item was added successfully, false if item was not added
+     */
     public boolean addItem(Item item, int slotNum) {
         if (slots[slotNum].addItem(item)) {
             return true;
@@ -24,8 +42,11 @@ public class VendingMachine {
         }
     }
 
+    /**
+     * This method displays the contents of the vending machine. It displays
+     * contents of the elements of the slots array.
+     */
     public void displayContent() {
-
         for (int i = 0; i < slots.length; i += 3) {
             if (i == 0) {
                 System.out.println("\n+-----------------+-----------------+-----------------+");
@@ -46,20 +67,12 @@ public class VendingMachine {
         }
     }
 
-    /*
-     * private int getNumInput() {
-     * Scanner sc = new Scanner(System.in);
-     * int num = 0;
-     * try {
-     * num = sc.nextInt();
-     * } catch (Exception e) {
-     * System.out.println("Invalid input");
-     * }
-     * sc.close();
-     * return num;
-     * }
+    /**
+     * This method outputs the menu of the vending machine and calls upon the
+     * appopriate functions depending on the user's choice.
+     * 
+     * @param sc Scanner object to get user input
      */
-
     public void menu(Scanner sc) {
         int choice;
         do {
@@ -73,20 +86,22 @@ public class VendingMachine {
             choice = sc.nextInt();
             switch (choice) {
                 case 1:
+                    // Insert money to the machine and update the money variable
                     box.insertMoney(sc);
                     money = box.getTotalUserMoney();
                     break;
                 case 2:
+                    // Buy item from the machine
                     System.out.print("Enter slot number: ");
                     int slotNum = sc.nextInt();
                     if (slotNum > 0 && slotNum <= 9) {
                         buyItem(slotNum);
-
                     } else {
                         System.out.println("Invalid slot number");
                     }
                     break;
                 case 0:
+                    // Exit the program
                     if (money > 0) {
                         if (box.haveChange(0))
                             box.dispenseChange();
@@ -95,19 +110,28 @@ public class VendingMachine {
                     System.out.println();
                     break;
                 default:
+                    // Invalid choice
                     System.out.println("Invalid choice");
             }
         } while (choice != 0);
 
     }
 
+    /**
+     * This method changes the price of a chosen item. It uses the setItemsPrice
+     * method of the Slot class.
+     * 
+     * @param sc Scanner object to get user input
+     */
     public void changePrice(Scanner sc) {
         String name = "";
         int price;
         System.out.println("Choose which item to change price: ");
+        // Print the list of set items
         printSetItemList();
         System.out.print("Choice: ");
         int choice = sc.nextInt();
+        // Set name to the name of the item chosen
         switch (choice) {
             case 1:
                 name = "Coke";
@@ -140,6 +164,8 @@ public class VendingMachine {
                 System.out.println("Invalid choice");
                 break;
         }
+        // If the item is not null, loop through the slots array and find the slot and
+        // then use the setItemsPrice method.
         if (!name.equals("")) {
             System.out.print("Enter new price: ");
             price = sc.nextInt();
@@ -149,9 +175,11 @@ public class VendingMachine {
                 }
             }
         }
-        // item.setPrice(price);
     }
 
+    /**
+     * This method prints the list of items that can be restocked.
+     */
     public void printSetItemList() {
         System.out.println("[1] Coke");
         System.out.println("[2] Sprite");
@@ -164,14 +192,24 @@ public class VendingMachine {
         System.out.println("[9] Sundae");
     }
 
+    /**
+     * This method restocks the items in the vending machine. It creates a new Item
+     * object depending on the user's choice and then adds it to the appropriate
+     * slot.
+     * 
+     * @param sc Scanner object to get user input
+     */
     public void restockItems(Scanner sc) {
         System.out.println("\nChoose which item to restock: ");
         printSetItemList();
+        // Get user input
         System.out.print("Choice: ");
         int choice = sc.nextInt();
+        // Get quantity
         System.out.print("Enter quantity: ");
         int quantity = sc.nextInt();
 
+        // Create new Item object depending on the user's choice and add it to the slot
         switch (choice) {
             case 1:
                 Item coke = new Item("Coke", 50, 140);
@@ -259,8 +297,16 @@ public class VendingMachine {
         }
     }
 
+    /**
+     * This method is used to buy an item from the vending machine.Aside from
+     * checking the item exists It checks if the user has enough money to buy the
+     * item and if the vending machine has enough change to give to the user.
+     * 
+     * @param slotNum The slot number of the item to be bought
+     * @return true if the item was bought successfully, false otherwise
+     */
     public boolean buyItem(int slotNum) {
-
+        // Check if the slot is empty
         if (slots[slotNum - 1].checkSlot() != null) {
             // Check if there is sufficient money
             if (money < slots[slotNum - 1].checkSlot().getPrice()) {
@@ -268,10 +314,13 @@ public class VendingMachine {
                 return false;
             } else if (box.haveChange(slots[slotNum - 1].checkSlot().getPrice())) {
                 System.out.println("You bought " + slots[slotNum - 1].checkSlot().getName());
+                // Update money and transactions
                 money = money - slots[slotNum - 1].checkSlot().getPrice();
                 transactions.recordTransaction(slots[slotNum - 1].checkSlot());
+                // Dispense change
                 box.dispenseChange();
                 System.out.println("Total money dispensed: Php " + money);
+                // Remove item from slot
                 slots[slotNum - 1].removeItem();
                 return true;
             } else {
@@ -284,6 +333,9 @@ public class VendingMachine {
         }
     }
 
+    /**
+     * This method is used to display the items in the vending machine.
+     */
     public void displayTransactions() {
         System.out.println("\nTRANSACTIONS");
         System.out.println("+-----------------------------------------------------------+");
@@ -309,6 +361,13 @@ public class VendingMachine {
 
     }
 
+    /**
+     * This method is used as the main menu for the maintenance of the vending. It
+     * calls the other methods for the maintenance of the vending machine depending
+     * on what the user wants to do.
+     * 
+     * @param sc Scanner object to be used for input
+     */
     public void maintenance(Scanner sc) {
         int choice = 0;
         boolean exit = false;
@@ -327,13 +386,16 @@ public class VendingMachine {
 
             switch (choice) {
                 case 1:
+                    // Restock items
                     didRestock = true;
                     restockItems(sc);
                     break;
                 case 2:
+                    // Change item price
                     changePrice(sc);
                     break;
                 case 3:
+                    // Replenish money
                     box.displayBoxContents();
                     if (box.replenishMoney(sc)) {
                         System.out.println("Denomination replenished.");
@@ -342,6 +404,7 @@ public class VendingMachine {
                     }
                     break;
                 case 4:
+                    // Collect money
                     box.displayBoxContents();
                     if (box.collectMoney()) {
                         System.out.println("Money collected.");
@@ -350,9 +413,11 @@ public class VendingMachine {
                     }
                     break;
                 case 5:
+                    // Display transactions
                     displayTransactions();
                     break;
                 case 0:
+                    // Check if restock was done and clear transactions if it was done
                     if (didRestock) {
                         transactions.clearTransactions();
                         System.out.println("Transactions history cleared.");
