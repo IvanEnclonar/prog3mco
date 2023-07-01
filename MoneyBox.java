@@ -1,23 +1,43 @@
 import java.util.Scanner;
 
+/**
+ * This class is used to keep track of the bills and coins in the vending
+ * machine. It is also used to check if the user has inserted enough money to
+ * buy an item, and to return change to the user.
+ */
 public class MoneyBox {
-    private int[] money = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    private int[] change = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    private int totalUserMoney = 0;
+    // Instance variables
+    private int[] money = { 0, 0, 0, 0, 0, 0, 0, 0, 0 }; // The bills and coins that the machine has in 1 5 10 20 50 100
+                                                         // 200 500 1000 format. The value corresponds to number of
+                                                         // bills or coins.
+    private int[] change = { 0, 0, 0, 0, 0, 0, 0, 0, 0 }; // Change to be returned to the user in the same format as
+                                                          // money.
+    private int totalUserMoney = 0; // The total amount of money that the user has inserted into the machine.
 
+    /**
+     * Constructor for MoneyBox
+     */
     public MoneyBox() {
     }
 
+    /**
+     * Method to insert money into the vending machine.
+     * 
+     * @param sc Scanner object to get input from the user
+     */
     public void insertMoney(Scanner sc) {
         int temp = 0;
 
-        System.out.print("Insert money (1 5 10 20 50 100 200 500 100): ");
+        // Get input from the user
+        System.out.print("Insert money (1 5 10 20 50 100 200 500 1000): ");
         sc.nextLine();
         String moneyInp = sc.nextLine();
 
         System.out.println();
+        // Split the input into an array
         String[] moneyArr = moneyInp.split(" ");
 
+        // Loop through the array and add the money to the machine
         for (int i = 0; i < moneyArr.length; i++) {
             temp = Integer.parseInt(moneyArr[i]);
             switch (temp) {
@@ -72,14 +92,27 @@ public class MoneyBox {
         }
     }
 
+    /**
+     * Checks if there is enough change in the machine to dispense to the user.
+     * 
+     * @param productTotal The total cost of the product that the user wants to buy
+     * @return true if there is enough change, false if there is not enough change
+     */
     public boolean haveChange(int productTotal) {
         int toDispense = totalUserMoney - productTotal;
+
+        // If the user has not inserted enough money, return false
         if (toDispense < 0)
             return false;
+
+        // Store initial values of money array
         int[] tempMoney = money;
+
+        // Set change array to 0
         for (int i = 0; i < 9; i++)
             change[i] = 0;
 
+        // Check if there is change, increment corresponding element in change array
         while (toDispense >= 1000 && money[8] > 0) {
             toDispense = toDispense - 1000;
             change[8] = change[8] + 1;
@@ -117,16 +150,22 @@ public class MoneyBox {
             change[0] = change[0] + 1;
         }
 
+        // If there is enough change, return true
         if (toDispense == 0)
             return true;
         else {
+            // If there is not enough change, revert money array and return false
             money = tempMoney;
             return false;
         }
     }
 
+    /**
+     * Dispenses the change to the user.
+     */
     public void dispenseChange() {
-        System.out.print("Dispensing money: ");
+        // Loop through money array and dispense the change, decrement corresponding
+        // denomination in money array
         for (int i = 0; i < 9; i++) {
             switch (i) {
                 case 0:
@@ -176,12 +215,16 @@ public class MoneyBox {
                     break;
             }
         }
+        // Reset change array
         for (int i = 0; i < 9; i++)
             change[i] = 0;
-
+        // Reset totalUserMoney
         totalUserMoney = 0;
     }
 
+    /**
+     * Displays the contents of the box
+     */
     public void displayBoxContents() {
         int tempTotal = 0;
         int total = 0;
@@ -238,6 +281,13 @@ public class MoneyBox {
         System.out.println("Total: " + total + " pesos");
     }
 
+    /**
+     * Helper method that adds to the money array given denomination and number to
+     * add
+     * 
+     * @param money denomination of money to add
+     * @param count number of money to add
+     */
     private void restockingMoney(int money, int count) {
         switch (money) {
             case 1:
@@ -270,6 +320,13 @@ public class MoneyBox {
         }
     }
 
+    /**
+     * Method that prompts the user to input a denomination and number of money to
+     * add
+     * 
+     * @param sc Scanner object
+     * @return true replenish was successful, false otherwise
+     */
     public boolean replenishMoney(Scanner sc) {
         System.out.println();
         System.out.print("Enter denomination: ");
@@ -294,6 +351,12 @@ public class MoneyBox {
         }
     }
 
+    /**
+     * Collects all the money in this MoneyBox
+     * 
+     * @return true if there is money to collect and it is collected successfully,
+     *         false otherwise
+     */
     public boolean collectMoney() {
         int count = 0;
         for (int i = 0; i < 9; i++) {
@@ -313,6 +376,11 @@ public class MoneyBox {
 
     }
 
+    /**
+     * Returns the money that the user has
+     * 
+     * @return totalUserMoney
+     */
     public int getTotalUserMoney() {
         return totalUserMoney;
     }
