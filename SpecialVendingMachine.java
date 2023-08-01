@@ -38,6 +38,15 @@ public class SpecialVendingMachine extends VendingMachine {
         }
     }
 
+    public String getCart() {
+        // Edit this if you wanna change the text layout.
+        String text = "";
+        for (int i = 0; i < cart.size(); i++) {
+            text = text + cart.get(i).getName() + "\n";
+        }
+        return text;
+    }
+
     public int getTotalPrice() {
         int total = 0;
         for (int i = 0; i < cart.size(); i++) {
