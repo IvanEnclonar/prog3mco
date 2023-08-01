@@ -9,15 +9,17 @@ public class RegularView extends JFrame{
                     money200, money500, money1k, dispenseMoney;
     private JLabel moneyLabel = new JLabel("Insert Money");
     private JTextArea dispense, money;
+    private VendingMachine vm;
 
-    public RegularView(){
+    public RegularView(VendingMachine vm){
         super("Regular Vending Machine");
+        this.vm = vm;
         setSize(630, 1000);
         setResizable(false);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(new FlowLayout());
 
-        emptyItemButtons();
+        itemButtons();
 
         add(Box.createRigidArea(new Dimension(600, 25)));
         add(Box.createRigidArea(new Dimension(250, 10)));
@@ -39,72 +41,93 @@ public class RegularView extends JFrame{
         setVisible(true);
     }
 
-    public void emptyItemButtons(){
+    public void itemButtons(){
         for(int i = 0; i < 9; i++){
-            FoodButtons[i] = new JButton("Item Unavailable");
-            FoodButtons[i].setPreferredSize(new Dimension(200, 175));
-            add(FoodButtons[i]);
+            if(vm.slots[i].getNumItems() != 0){
+                FoodButtons[i] = new JButton();
+                FoodButtons(i);
+                FoodButtons[i].setPreferredSize(new Dimension(200, 175));
+                add(FoodButtons[i]);
+            }
+            else{
+                FoodButtons[i] = new JButton("Item Unavailable");
+                FoodButtons[i].setPreferredSize(new Dimension(200, 175));
+                add(FoodButtons[i]);
+            }
         }
     }
 
     public void FoodButtons(int i){
         switch(i){
             case 0:
-                int cokePrice = 50;
-                float cokeCal = 140;
+                int cokePrice = vm.slots[0].checkSlot().getPrice();
+                float cokeCal = vm.slots[0].checkSlot().getCalories();
                 String cokeString = cokeCal + " cal\nPhp " + cokePrice;
-                Icon cokeIcon = new ImageIcon(getClass().getResource("coke.png"));
+                Icon cokeIcon = new ImageIcon(getClass().getResource("icons/coke.png"));
                 FoodButtons[i].setIcon(cokeIcon);
                 FoodButtons[i].setText("<html><center>" + cokeString.replaceAll("\\n", "<br>") + "</html>");
                 FoodButtons[i].setHorizontalTextPosition(JButton.CENTER);
                 FoodButtons[i].setVerticalTextPosition(JButton.BOTTOM);
+                break;
             case 1:
-                int spritePrice = 45;
-                float spriteCal = 50;
+                int spritePrice = vm.slots[1].checkSlot().getPrice();
+                float spriteCal = vm.slots[1].checkSlot().getCalories();
                 String spriteString = spriteCal + " cal\nPhp " + spritePrice;
-                Icon spriteIcon = new ImageIcon(getClass().getResource("sprite.png"));
+                Icon spriteIcon = new ImageIcon(getClass().getResource("icons/sprite.png"));
                 FoodButtons[i].setIcon(spriteIcon);
                 FoodButtons[i].setText("<html><center>" + spriteString.replaceAll("\\n", "<br>") + "</html>");
                 FoodButtons[i].setHorizontalTextPosition(JButton.CENTER);
                 FoodButtons[i].setVerticalTextPosition(JButton.BOTTOM);
                 break;
             case 2:
-                FoodButtons[i].setText("Royal");
+                int royalPrice = vm.slots[2].checkSlot().getPrice();
+                float royalCal = vm.slots[2].checkSlot().getCalories();
+                String royalString = royalCal + " cal\nPhp " + royalPrice;
+                FoodButtons[i].setText("<html><center>" + royalString.replaceAll("\\n", "<br>") + "</html>");
                 break;
             case 3:
-                int dietCokePrice = 63;
-                float dietCokeCal = 0;
+                int dietCokePrice = vm.slots[3].checkSlot().getPrice();
+                float dietCokeCal = vm.slots[3].checkSlot().getCalories();
                 String dietCokeString = dietCokeCal + " cal\nPhp " + dietCokePrice;
-                Icon dietCokeIcon = new ImageIcon(getClass().getResource("diet coke.png"));
+                Icon dietCokeIcon = new ImageIcon(getClass().getResource("icons/diet coke.png"));
                 FoodButtons[i].setIcon(dietCokeIcon);
                 FoodButtons[i].setText("<html><center>" + dietCokeString.replaceAll("\\n", "<br>") + "</html>");
                 FoodButtons[i].setHorizontalTextPosition(JButton.CENTER);
                 FoodButtons[i].setVerticalTextPosition(JButton.BOTTOM);
                 break;
             case 4:
-                FoodButtons[i].setText("Cheese Burger");
+                int cheeseBurgerPrice = vm.slots[4].checkSlot().getPrice();
+                float cheeseBurgerCal = vm.slots[4].checkSlot().getCalories();
+                String cheeseBurgerString = cheeseBurgerCal + " cal\nPhp " + cheeseBurgerPrice;
+                FoodButtons[i].setText("<html><center>" + cheeseBurgerString.replaceAll("\\n", "<br>") + "</html>");
                 break;
             case 5:
-                FoodButtons[i].setText("Chicken Burger");
+                int chickenBurgerPrice = vm.slots[5].checkSlot().getPrice();
+                float chickenBurgerCal = vm.slots[5].checkSlot().getCalories();
+                String chickenBurgerString = chickenBurgerCal + " cal\nPhp " + chickenBurgerPrice;
+                FoodButtons[i].setText("<html><center>" + chickenBurgerString.replaceAll("\\n", "<br>") + "</html>");
                 break;
             case 6:
-                FoodButtons[i].setText("Bacon Burger");
+                int baconBurgerPrice = vm.slots[6].checkSlot().getPrice();
+                float baconBurgerCal = vm.slots[6].checkSlot().getCalories();
+                String baconBurgerString = baconBurgerCal + " cal\nPhp " + baconBurgerPrice;
+                FoodButtons[i].setText("<html><center>" + baconBurgerString.replaceAll("\\n", "<br>") + "</html>");
                 break;
             case 7:
-                int friesPrice = 50;
-                float friesCal = 200;
+                int friesPrice = vm.slots[7].checkSlot().getPrice();
+                float friesCal = vm.slots[7].checkSlot().getCalories();
                 String friesString = friesCal + " cal\nPhp " + friesPrice;
-                Icon friesIcon = new ImageIcon(getClass().getResource("fries.png"));
+                Icon friesIcon = new ImageIcon(getClass().getResource("icons/fries.png"));
                 FoodButtons[i].setIcon(friesIcon);
                 FoodButtons[i].setText("<html><center>" + friesString.replaceAll("\\n", "<br>") + "</html>");
                 FoodButtons[i].setHorizontalTextPosition(JButton.CENTER);
                 FoodButtons[i].setVerticalTextPosition(JButton.BOTTOM);
                 break;
             case 8:
-                int sundaePrice = 63;
-                float sundaeCal = 250;
+                int sundaePrice = vm.slots[8].checkSlot().getPrice();
+                float sundaeCal = vm.slots[8].checkSlot().getCalories();
                 String sundaeString = sundaeCal + " cal\nPhp " + sundaePrice;
-                Icon sundaeIcon = new ImageIcon(getClass().getResource("sundae.png"));
+                Icon sundaeIcon = new ImageIcon(getClass().getResource("icons/sundae.png"));
                 FoodButtons[i].setIcon(sundaeIcon);
                 FoodButtons[i].setText("<html><center>" + sundaeString.replaceAll("\\n", "<br>") + "</html>");
                 FoodButtons[i].setHorizontalTextPosition(JButton.CENTER);
@@ -233,12 +256,12 @@ public class RegularView extends JFrame{
         money1k.addActionListener(actionListener);
     }
 
-    public void dispenseDisplay(String dispense){
-        this.dispense.setText(dispense);
+    public void dispenseDisplay(String text){
+        this.dispense.setText(text);
     }
 
-    public void moneyDisplay(String money){
-        this.money.setText(money);
+    public void moneyDisplay(String text){
+        this.money.setText(text);
     }
 
     public void dispenseMoneyListener(ActionListener actionListener){

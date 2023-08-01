@@ -60,7 +60,7 @@ public class FactoryController{
                     }
                     else{
                         factoryView.display("Testing Regular Vending Machine.");
-                        RegularView rvm = new RegularView();
+                        RegularView rvm = new RegularView(model.getVM());
                         RegularController rvmController = new RegularController(rvm, model);
                     }
                 }
@@ -73,7 +73,19 @@ public class FactoryController{
         factoryView.maintainVMListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                if(model.vmExists()){
+                    if(model.isSpecial()){
+                        factoryView.display("Maintaining Special Vending Machine.");
+                    }
+                    else{
+                        factoryView.display("Maintaining Regular Vending Machine.");
+                        RMaintenanceView rmv = new RMaintenanceView(model.getVM());
+                        RMaintenanceController rmvController = new RMaintenanceController(rmv, model);
+                    }
+                }
+                else{
+                    factoryView.display("No Vending Machine exists.");
+                }
             }
         });
     }

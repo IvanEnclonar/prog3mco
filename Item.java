@@ -3,8 +3,8 @@
  */
 public class Item {
     private String name;
-    private int price;
-    private float calories;
+    private int price = 0;
+    private float calories = 0;
 
     /**
      * Constructor for Item
