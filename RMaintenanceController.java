@@ -1,9 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.TimeUnit;
 
 public class RMaintenanceController{
-    private Model model;
     private RMaintenanceView rmv;
     String itemNamesList[] = { "Coke", "Sprite", "Royal", 
                                 "Diet Coke", "Cheese Burger", "Chicken Burger",
@@ -11,17 +9,16 @@ public class RMaintenanceController{
     private int denomination, count;
 
     public RMaintenanceController(RMaintenanceView rmv, Model model){
-        this.model = model;
         this.rmv = rmv;
 
-        rmv.viewInventoryListener(new ActionListener() {
+        this.rmv.viewInventoryListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 rmv.foodTextDisplay(rmv.getItemInventory());
             }
         });
 
-        rmv.restockItemListener(new ActionListener() {
+        this.rmv.restockItemListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int slotNum = Integer.parseInt(rmv.getItemIndex());
@@ -30,16 +27,16 @@ public class RMaintenanceController{
             }
         });
 
-        rmv.restockMoneyListener(new ActionListener() {
+        this.rmv.restockMoneyListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 denomination = Integer.parseInt(rmv.getDenomination());
                 count = Integer.parseInt(rmv.getMoneyQuantity());
                 rmv.moneyTextDisplay(model.getVM().box.restockingMoney(denomination, count));;
             }
-        });
+        }); 
     
-        rmv.dispAllListener(new ActionListener() {
+        this.rmv.dispAllListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
                 rmv.moneyTextDisplay("1 peso: "+String.valueOf(model.getVM().box.getMoney(0))+"pcs.\n"+
@@ -54,7 +51,7 @@ public class RMaintenanceController{
             }
         });
 
-        rmv.collectAllListener(new ActionListener() {
+        this.rmv.collectAllListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
                 rmv.moneyTextDisplay(model.getVM().box.collectMoney());

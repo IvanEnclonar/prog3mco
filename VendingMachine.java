@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class VendingMachine {
     Slot[] slots = new Slot[9];
     int money = 0;

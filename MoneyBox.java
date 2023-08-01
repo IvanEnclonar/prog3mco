@@ -74,73 +74,60 @@ public class MoneyBox {
 
     public boolean haveChange(int productTotal) {
         int toDispense = totalUserMoney - productTotal;
-
-        // If the user has not inserted enough money, return false
-        if (toDispense < 0)
-            return false;
-
-        // Store initial values of money array
-        int[] tempChange = this.change;
         int[] tempMoney = money;
+        int[] tempChange = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-        // Set change array to 0
-        for (int i = 0; i < 9; i++)
-            change[i] = 0;
-
-        // Check if there is change, increment corresponding element in change array
-        while (toDispense >= 1000 && money[8] > 0) {
+        while(toDispense >= 1000 & tempMoney[8] > 0){
+            tempMoney[8] = tempMoney[8] - 1;
+            tempChange[8] = tempChange[8] + 1;
             toDispense = toDispense - 1000;
-            money[8] = money[8] - 1;
-            change[8] = change[8] + 1;
         }
-        while (toDispense >= 500 && money[7] > 0) {
+        while(toDispense >= 500 & tempMoney[7] > 0){
+            tempMoney[7] = tempMoney[7] - 1;
+            tempChange[7] = tempChange[7] + 1;
             toDispense = toDispense - 500;
-            money[7] = money[7] - 1;
-            change[7] = change[7] + 1;
         }
-        while (toDispense >= 200 && money[6] > 0) {
+        while(toDispense >= 200 & tempMoney[6] > 0){
+            tempMoney[6] = tempMoney[6] - 1;
+            tempChange[6] = tempChange[6] + 1;
             toDispense = toDispense - 200;
-            money[6] = money[6] - 1;
-            change[6] = change[6] + 1;
         }
-        while (toDispense >= 100 && money[5] > 0) {
+        while(toDispense >= 100 & tempMoney[5] > 0){
+            tempMoney[5] = tempMoney[5] - 1;
+            tempChange[5] = tempChange[5] + 1;
             toDispense = toDispense - 100;
-            money[5] = money[5] - 1;
-            change[5] = change[5] + 1;
         }
-        while (toDispense >= 50 && money[4] > 0) {
+        while(toDispense >= 50 & tempMoney[4] > 0){
+            tempMoney[4] = tempMoney[4] - 1;
+            tempChange[4] = tempChange[4] + 1;
             toDispense = toDispense - 50;
-            money[4] = money[4] - 1;
-            change[4] = change[4] + 1;
         }
-        while (toDispense >= 20 && money[3] > 0) {
+        while(toDispense >= 20 & tempMoney[3] > 0){
+            tempMoney[3] = tempMoney[3] - 1;
+            tempChange[3] = tempChange[3] + 1;
             toDispense = toDispense - 20;
-            money[3] = money[3] - 1;
-            change[3] = change[3] + 1;
         }
-        while (toDispense >= 10 && money[2] > 0) {
+        while(toDispense >= 10 & tempMoney[2] > 0){
+            tempMoney[2] = tempMoney[2] - 1;
+            tempChange[2] = tempChange[2] + 1;
             toDispense = toDispense - 10;
-            money[2] = money[2] - 1;
-            change[2] = change[2] + 1;
         }
-        while (toDispense >= 5 && money[1] > 0) {
+        while(toDispense >= 5 & tempMoney[1] > 0){
+            tempMoney[1] = tempMoney[1] - 1;
+            tempChange[1] = tempChange[1] + 1;
             toDispense = toDispense - 5;
-            money[1] = money[1] - 1;
-            change[1] = change[1] + 1;
         }
-        while (toDispense >= 1 && money[0] > 0) {
+        while(toDispense >= 1 & tempMoney[0] > 0){
+            tempMoney[0] = tempMoney[0] - 1;
+            tempChange[0] = tempChange[0] + 1;
             toDispense = toDispense - 1;
-            money[0] = money[0] - 1;
-            change[0] = this.change[0] + 1;
         }
 
-        // If there is enough change, return true
-        if (toDispense == 0)
-            return true;
-        else {
-            // If there is not enough change, revert money array and return false
-            money = tempMoney;
+        if(toDispense == 0){
             change = tempChange;
+            return true;
+        }
+        else{
             return false;
         }
     }

@@ -3,13 +3,11 @@ import java.awt.event.ActionListener;
 
 public class FactoryController{
     private FactoryView factoryView;
-    private Model model;
 
     public FactoryController(FactoryView factoryView, Model model){
         this.factoryView = factoryView;
-        this.model = model;
 
-        factoryView.createRVMListener(new ActionListener() {
+        this.factoryView.createRVMListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(model.vmExists()){
@@ -30,7 +28,7 @@ public class FactoryController{
             }
         });
 
-        factoryView.createSVMListener(new ActionListener() {
+        this.factoryView.createSVMListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(model.vmExists()){
@@ -51,7 +49,7 @@ public class FactoryController{
             }
         });
 
-        factoryView.testVMListener(new ActionListener() {
+        this.factoryView.testVMListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(model.vmExists()){
@@ -70,7 +68,7 @@ public class FactoryController{
             }
         });
 
-        factoryView.maintainVMListener(new ActionListener() {
+        this.factoryView.maintainVMListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(model.vmExists()){
