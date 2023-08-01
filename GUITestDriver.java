@@ -4,5 +4,6 @@ public class GUITestDriver {
         FactoryView view = new FactoryView();
         FactoryController controller = new FactoryController(view, model);
 
+        //SpecialView view = new SpecialView(model.getVM());
     }
 }

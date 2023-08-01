@@ -55,6 +55,7 @@ public class FactoryController{
                 if(model.vmExists()){
                     if(model.isSpecial()){
                         factoryView.display("Testing Special Vending Machine.");
+                        SpecialView svm = new SpecialView(model.getVM());
                     }
                     else{
                         factoryView.display("Testing Regular Vending Machine.");

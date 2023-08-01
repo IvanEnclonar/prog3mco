@@ -9,7 +9,7 @@ public class Model{
     }
 
     public boolean createSpecialVM(){
-        vm = new VendingMachine();
+        vm = new SpecialVendingMachine();
         special = true;
         return true;
     }
