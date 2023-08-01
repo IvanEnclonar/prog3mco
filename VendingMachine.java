@@ -7,10 +7,9 @@ public class VendingMachine {
             "Bacon Burger",
             "Fries", "Sundae" };
 
-
     public VendingMachine() {
         for (int i = 0; i < slots.length; i++) {
-            slots[i] = new Slot();
+            slots[i] = new Slot(i);
         }
     }
 
