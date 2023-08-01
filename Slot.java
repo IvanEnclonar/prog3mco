@@ -1,3 +1,5 @@
+import java.nio.channels.Pipe;
+
 /**
  * Slot class the represents a slot in the vending machine. Each slot can hold
  * up to 10 items of a single type.
@@ -5,6 +7,7 @@
  */
 public class Slot {
     // Instance variables
+    private int slotNumber;
     private int itemLimit = 10;
     private int numItems = 0; // Number of items in the slot
     private Item items[] = new Item[itemLimit]; // Array of Items in the slot
@@ -12,7 +15,8 @@ public class Slot {
     /**
      * Constructor for Slot if you just want to create instance of an empty slot.
      */
-    public Slot() {
+    public Slot(int slotNumber) {
+        this.slotNumber = slotNumber;
     }
 
     /**
@@ -69,8 +73,10 @@ public class Slot {
      * @param price The price to set all items in the slot to
      */
     public void setItemsPrice(int price) {
-        for (int i = 0; i < numItems; i++) {
-            items[i].setPrice(price);
+        if (price > 0) {
+            for (int i = 0; i < numItems; i++) {
+                items[i].setPrice(price);
+            }
         }
     }
 
@@ -171,4 +177,7 @@ public class Slot {
         return numItems;
     }
 
+    public int getSlotNumber() {
+        return slotNumber;
+    }
 }
