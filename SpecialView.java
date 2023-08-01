@@ -115,4 +115,95 @@ public class SpecialView extends JFrame{
         add(money);
     }
 
+    public void Food0Listener(ActionListener actionListener){
+        FoodButtons[0].addActionListener(actionListener);
+    }
+
+    public void Food1Listener(ActionListener actionListener){
+        FoodButtons[1].addActionListener(actionListener);
+    }
+
+    public void Food2Listener(ActionListener actionListener){
+        FoodButtons[2].addActionListener(actionListener);
+    }
+
+    public void Food3Listener(ActionListener actionListener){
+        FoodButtons[3].addActionListener(actionListener);
+    }
+
+    public void Food4Listener(ActionListener actionListener){
+        FoodButtons[4].addActionListener(actionListener);
+    }
+
+    public void Food5Listener(ActionListener actionListener){
+        FoodButtons[5].addActionListener(actionListener);
+    }
+
+    public void Food6Listener(ActionListener actionListener){
+        FoodButtons[6].addActionListener(actionListener);
+    }
+
+    public void Food7Listener(ActionListener actionListener){
+        FoodButtons[7].addActionListener(actionListener);
+    }
+
+    public void Food8Listener(ActionListener actionListener){
+        FoodButtons[8].addActionListener(actionListener);
+    }
+
+    public void Food9Listener(ActionListener actionListener){
+        FoodButtons[9].addActionListener(actionListener);
+    }
+
+    public void Food10Listener(ActionListener actionListener){
+        FoodButtons[10].addActionListener(actionListener);
+    }
+
+    public void Food11Listener(ActionListener actionListener){
+        FoodButtons[11].addActionListener(actionListener);
+    }
+
+    public void Money1Listener(ActionListener actionListener){
+        money1.addActionListener(actionListener);
+    }
+
+    public void Money5Listener(ActionListener actionListener){
+        money5.addActionListener(actionListener);
+    }
+
+    public void Money10Listener(ActionListener actionListener){
+        money10.addActionListener(actionListener);
+    }
+
+    public void Money20Listener(ActionListener actionListener){
+        money20.addActionListener(actionListener);
+    }
+
+    public void Money50Listener(ActionListener actionListener){
+        money50.addActionListener(actionListener);
+    }
+
+    public void Money100Listener(ActionListener actionListener){
+        money100.addActionListener(actionListener);
+    }
+
+    public void Money200Listener(ActionListener actionListener){
+        money200.addActionListener(actionListener);
+    }
+
+    public void Money500Listener(ActionListener actionListener){
+        money500.addActionListener(actionListener);
+    }
+
+    public void Money1kListener(ActionListener actionListener){
+        money1k.addActionListener(actionListener);
+    }
+
+    public void confirmListener(ActionListener actionListener){
+        confirmPurchase.addActionListener(actionListener);
+    }
+
+    public void cancelListener(ActionListener actionListener){
+        cancel.addActionListener(actionListener);
+    }
 }
