@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 public class RMaintenanceView extends JFrame{
     private JTextField itemIndex, itemQuantity, newPrice, moneyQuantity, denomination;
     private JButton restockItem, changePrice, restockMoney;
-    private JButton viewInventory, displayAll, collectAll;
-    private JLabel moneyLabel = new JLabel("Money Box Maintenance"), foodLabel = new JLabel("Food Inventory");
+    private JButton viewInventory, displayAll, collectAll, showTransactions;
+    private JLabel moneyLabel = new JLabel("Money Box Maintenance"), foodLabel = new JLabel("Inventory");
     private JTextArea foodDisplay, moneyDisplay;
     private VendingMachine vm;
     String itemNamesList[] = { "Coke", "Sprite", "Royal", 
@@ -18,7 +18,7 @@ public class RMaintenanceView extends JFrame{
 
         this.vm = vm;
 
-        setSize(630, 800);
+        setSize(630, 900);
         setResizable(false);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(new FlowLayout());
@@ -27,7 +27,7 @@ public class RMaintenanceView extends JFrame{
         add(foodLabel);
         add(Box.createRigidArea(new Dimension(215, 10)));
         foodDisplay = new JTextArea(getItemInventory());
-        foodDisplay.setPreferredSize(new Dimension(600, 200));
+        foodDisplay.setPreferredSize(new Dimension(600, 250));
         add(foodDisplay);
 
         viewInventory = new JButton("View Inventory");
@@ -49,6 +49,11 @@ public class RMaintenanceView extends JFrame{
         changePrice = new JButton("Change Price");
         changePrice.setPreferredSize(new Dimension(200, 30));
         add(changePrice);
+
+        add(Box.createRigidArea(new Dimension(600, 40)));
+        showTransactions = new JButton("Show All Transactions");
+        showTransactions.setPreferredSize(new Dimension(605, 30));
+        add(showTransactions);
 
         add(Box.createRigidArea(new Dimension(600, 40)));
         add(Box.createRigidArea(new Dimension(215, 10)));
@@ -88,6 +93,10 @@ public class RMaintenanceView extends JFrame{
 
     public void changePriceListener(ActionListener actionListener){
         changePrice.addActionListener(actionListener);
+    }
+
+    public void showTransactionsListener(ActionListener actionListener){
+        showTransactions.addActionListener(actionListener);
     }
 
     public void restockMoneyListener(ActionListener actionListener){

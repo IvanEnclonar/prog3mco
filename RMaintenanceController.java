@@ -1,6 +1,8 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Action;
+
 public class RMaintenanceController{
     private RMaintenanceView rmv;
     String itemNamesList[] = { "Coke", "Sprite", "Royal", 
@@ -10,6 +12,8 @@ public class RMaintenanceController{
 
     public RMaintenanceController(RMaintenanceView rmv, Model model){
         this.rmv = rmv;
+
+        model.getVM().transactions.clearTransactions();
 
         this.rmv.viewInventoryListener(new ActionListener() {
             @Override
@@ -24,6 +28,22 @@ public class RMaintenanceController{
                 int slotNum = Integer.parseInt(rmv.getItemIndex());
                 int quantity = Integer.parseInt(rmv.getItemQuantity());
                 rmv.foodTextDisplay(model.getVM().restockItems(slotNum, quantity));
+            }
+        });
+
+        this.rmv.changePriceListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int slotNum = Integer.parseInt(rmv.getItemIndex());
+                int newPrice = Integer.parseInt(rmv.getNewPrice());
+                rmv.foodTextDisplay(model.getVM().changePrice(slotNum, newPrice));
+            }
+        });
+
+        this.rmv.showTransactionsListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                rmv.foodTextDisplay(model.getVM().displayTransactions());
             }
         });
 

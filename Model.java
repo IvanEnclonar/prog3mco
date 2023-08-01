@@ -14,14 +14,6 @@ public class Model{
         return true;
     }
 
-    public void testVM(){
-        
-    }
-
-    public void maintainVM(){
-        
-    }
-
     public boolean vmExists(){
         if(vm == null){
             return false;

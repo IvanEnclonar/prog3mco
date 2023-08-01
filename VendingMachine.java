@@ -6,6 +6,7 @@ public class VendingMachine {
     String itemNamesList[] = { "Coke", "Sprite", "Royal", "Diet Coke", "Cheese Burger", "Chicken Burger",
             "Bacon Burger",
             "Fries", "Sundae" };
+    boolean didRestock = false;
 
     public VendingMachine() {
         for (int i = 0; i < slots.length; i++) {
@@ -174,7 +175,57 @@ public class VendingMachine {
             default:
                 break;
         }
+
+        didRestock = true;
         return text;
+    }
+
+    public String changePrice(int choice, int newPrice) {
+        String name = "";
+        // Set name to the name of the item chosen
+        switch (choice) {
+            case 1:
+                name = "Coke";
+                break;
+            case 2:
+                name = "Sprite";
+                break;
+            case 3:
+                name = "Royal";
+                break;
+            case 4:
+                name = "Diet Coke";
+                break;
+            case 5:
+                name = "Cheese Burger";
+                break;
+            case 6:
+                name = "Chicken Burger";
+                break;
+            case 7:
+                name = "Bacon Burger";
+                break;
+            case 8:
+                name = "Fries";
+                break;
+            case 9:
+                name = "Sundae";
+                break;
+            default:
+                System.out.println("Invalid choice");
+                break;
+        }
+        // If the item is not null, loop through the slots array and find the slot and
+        // then use the setItemsPrice method.
+        if (!name.equals("")) {
+            for (int i = 0; i < slots.length; i++) {
+                if (slots[i].getItemName().equals(name)) {
+                    slots[i].setItemsPrice(newPrice);
+                }
+            }
+        }
+
+        return name + " price changed to P" + newPrice;
     }
 
     public String buyItem(int slotNum) {
@@ -195,5 +246,29 @@ public class VendingMachine {
         }
 
         return text;
+    }
+
+    public String displayTransactions() {
+        String text = "";
+        text += "\nTRANSACTIONS";
+        text += "\n+-------------------------------------------------------------------------------------------------------------------------------------------+";
+        text += "\n|                           Item Name                       |         Initital         |     Remaining     |     Sold     |       Total Sales       |";
+        text += "\n+-------------------------------------------------------------------------------------------------------------------------------------------+";
+
+        for (int i = 0; i < 9; i++) {
+            text += "\n|";
+            text += String.format("\t%s\t\t", itemNamesList[i]);
+            text += String.format("%-25s", (slots[i].getNumItems() + transactions.countItem(itemNamesList[i])));
+            text += String.format("%-20s", slots[i].getNumItems());
+            text += String.format("%-18s", transactions.countItem(itemNamesList[i]));
+            text += String.format("  %-25s", "Php " + transactions.countSales(itemNamesList[i]));
+            text+= "|";
+        }
+        text += "\n+-------------------------------------------------------------------------------------------------------------------------------------------+";
+        return text;
+    }
+
+    public boolean didRestock() {
+        return didRestock;
     }
 }

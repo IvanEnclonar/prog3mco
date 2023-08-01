@@ -1,5 +1,3 @@
-import java.nio.channels.Pipe;
-
 /**
  * Slot class the represents a slot in the vending machine. Each slot can hold
  * up to 10 items of a single type.
