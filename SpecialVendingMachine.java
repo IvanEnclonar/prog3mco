@@ -312,7 +312,7 @@ public class SpecialVendingMachine extends VendingMachine {
                 for (int i = 0; i < cart.size(); i++) {
                     if (cart.get(i) instanceof Burger) {
                         Burger b = (Burger) cart.get(i);
-                        Addons a = (Addons) slots[slotNum].checkSlot();
+                        Addons a = (Addons) slots[slotNum].removeItem();
                         b.addAddons(a);
                     }
                 }
@@ -437,7 +437,7 @@ public class SpecialVendingMachine extends VendingMachine {
             text = "Cart is empty.";
         } else {
             if (money < getTotalPrice()) {
-                text = "Insufficient money.\n\n"+box.dispenseChange();
+                text = "Insufficient money.\n\n" + box.dispenseChange();
             } else if (box.haveChange(getTotalPrice())) {
 
                 money = money - getTotalPrice();
