@@ -104,22 +104,22 @@ public class SpecialView extends JFrame {
                 icon = new ImageIcon(getClass().getResource("icons/sprite.png"));
                 break;
             case 6:
-                string = string + "\nfried egg";
+                icon = new ImageIcon(getClass().getResource("icons/fried egg.png"));
                 break;
             case 7:
-                string = string + "\nlettuce";
+                icon = new ImageIcon(getClass().getResource("icons/lettuce.png"));
                 break;
             case 8:
-                string = string + "\ntomato slice";
+                icon = new ImageIcon(getClass().getResource("icons/tomato slice.png"));
                 break;
             case 9:
-                string = string + "\ncheese slice";
+                icon = new ImageIcon(getClass().getResource("icons/cheese.png"));
                 break;
             case 10:
-                string = string + "\nbacon strip";
+                icon = new ImageIcon(getClass().getResource("icons/bacon strip.png"));
                 break;
             case 11:
-                string = string + "\npickle slice";
+                icon = new ImageIcon(getClass().getResource("icons/pickle.png"));
                 break;
         }
         FoodButtons[i].setIcon(icon);
