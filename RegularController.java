@@ -16,7 +16,7 @@ public class RegularController{
                     regularView.dispenseDisplay(model.getVM().buyItem(0)+"\n\n"+model.getVM().box.dispenseChange());
                     regularView.moneyDisplay("Dispensing...\n\nBalance: P"+String.valueOf(model.getVM().box.getTotalUserMoney()));
                     if(model.getVM().slots[0].getNumItems() == 0){
-                        //regularView.DisableButton(0);
+                        regularView.DisableButton(0);
                     }
                 }
                 else if(model.getVM().box.getTotalUserMoney() <= 0){
@@ -36,6 +36,9 @@ public class RegularController{
                 if (model.getVM().box.getTotalUserMoney() > 0 && model.getVM().box.haveChange(model.getVM().slots[1].checkSlot().getPrice())){
                     regularView.dispenseDisplay(model.getVM().buyItem(1)+"\n\n"+model.getVM().box.dispenseChange());
                     regularView.moneyDisplay("Dispensing...\n\nBalance: P"+String.valueOf(model.getVM().box.getTotalUserMoney()));
+                    if(model.getVM().slots[0].getNumItems() == 0){
+                        regularView.DisableButton(1);
+                    }
                 }
                 else if(model.getVM().box.getTotalUserMoney() <= 0){
                     regularView.dispenseDisplay("");
@@ -54,6 +57,9 @@ public class RegularController{
                 if (model.getVM().box.getTotalUserMoney() > 0 && model.getVM().box.haveChange(model.getVM().slots[2].checkSlot().getPrice())){
                     regularView.dispenseDisplay(model.getVM().buyItem(2)+"\n\n"+model.getVM().box.dispenseChange());
                     regularView.moneyDisplay("Dispensing...\n\nBalance: P"+String.valueOf(model.getVM().box.getTotalUserMoney()));
+                    if(model.getVM().slots[0].getNumItems() == 0){
+                        regularView.DisableButton(2);
+                    }
                 }
                 else if(model.getVM().box.getTotalUserMoney() <= 0){
                     regularView.dispenseDisplay("");
@@ -72,6 +78,9 @@ public class RegularController{
                 if (model.getVM().box.getTotalUserMoney() > 0 && model.getVM().box.haveChange(model.getVM().slots[3].checkSlot().getPrice())){
                     regularView.dispenseDisplay(model.getVM().buyItem(3)+"\n\n"+model.getVM().box.dispenseChange());
                     regularView.moneyDisplay("Dispensing...\n\nBalance: P"+String.valueOf(model.getVM().box.getTotalUserMoney()));
+                    if(model.getVM().slots[0].getNumItems() == 0){
+                        regularView.DisableButton(3);
+                    }
                 }
                 else if(model.getVM().box.getTotalUserMoney() <= 0){
                     regularView.dispenseDisplay("");
@@ -90,6 +99,9 @@ public class RegularController{
                 if (model.getVM().box.getTotalUserMoney() > 0 && model.getVM().box.haveChange(model.getVM().slots[4].checkSlot().getPrice())){
                     regularView.dispenseDisplay(model.getVM().buyItem(4)+"\n\n"+model.getVM().box.dispenseChange());
                     regularView.moneyDisplay("Dispensing...\n\nBalance: P"+String.valueOf(model.getVM().box.getTotalUserMoney()));
+                    if(model.getVM().slots[0].getNumItems() == 0){
+                        regularView.DisableButton(4);
+                    }
                 }
                 else if(model.getVM().box.getTotalUserMoney() <= 0){
                     regularView.dispenseDisplay("");
@@ -108,6 +120,9 @@ public class RegularController{
                 if (model.getVM().box.getTotalUserMoney() > 0 && model.getVM().box.haveChange(model.getVM().slots[5].checkSlot().getPrice())){
                     regularView.dispenseDisplay(model.getVM().buyItem(5)+"\n\n"+model.getVM().box.dispenseChange());
                     regularView.moneyDisplay("Dispensing...\n\nBalance: P"+String.valueOf(model.getVM().box.getTotalUserMoney()));
+                    if(model.getVM().slots[0].getNumItems() == 0){
+                        regularView.DisableButton(5);
+                    }
                 }
                 else if(model.getVM().box.getTotalUserMoney() <= 0){
                     regularView.dispenseDisplay("");
@@ -126,6 +141,9 @@ public class RegularController{
                 if (model.getVM().box.getTotalUserMoney() > 0 && model.getVM().box.haveChange(model.getVM().slots[6].checkSlot().getPrice())){
                     regularView.dispenseDisplay(model.getVM().buyItem(6)+"\n\n"+model.getVM().box.dispenseChange());
                     regularView.moneyDisplay("Dispensing...\n\nBalance: P"+String.valueOf(model.getVM().box.getTotalUserMoney()));
+                    if(model.getVM().slots[0].getNumItems() == 0){
+                        regularView.DisableButton(6);
+                    }
                 }
                 else if(model.getVM().box.getTotalUserMoney() <= 0){
                     regularView.dispenseDisplay("");
@@ -144,6 +162,9 @@ public class RegularController{
                 if (model.getVM().box.getTotalUserMoney() > 0 && model.getVM().box.haveChange(model.getVM().slots[7].checkSlot().getPrice())){
                     regularView.dispenseDisplay(model.getVM().buyItem(7)+"\n\n"+model.getVM().box.dispenseChange());
                     regularView.moneyDisplay("Dispensing...\n\nBalance: P"+String.valueOf(model.getVM().box.getTotalUserMoney()));
+                    if(model.getVM().slots[0].getNumItems() == 0){
+                        regularView.DisableButton(7);
+                    }
                 }
                 else if(model.getVM().box.getTotalUserMoney() <= 0){
                     regularView.dispenseDisplay("");
@@ -162,6 +183,9 @@ public class RegularController{
                 if (model.getVM().box.getTotalUserMoney() > 0 && model.getVM().box.haveChange(model.getVM().slots[8].checkSlot().getPrice())){
                     regularView.dispenseDisplay(model.getVM().buyItem(8)+"\n\n"+model.getVM().box.dispenseChange());
                     regularView.moneyDisplay("Dispensing...\n\nBalance: P"+String.valueOf(model.getVM().box.getTotalUserMoney()));
+                    if(model.getVM().slots[0].getNumItems() == 0){
+                        regularView.DisableButton(8);
+                    }
                 }
                 else if(model.getVM().box.getTotalUserMoney() <= 0){
                     regularView.dispenseDisplay("");

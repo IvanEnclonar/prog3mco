@@ -275,4 +275,8 @@ public class SpecialView extends JFrame {
     public void moneyDisplay(String text) {
         this.money.setText(text);
     }
+
+    public void DisableButton(int index){
+        FoodButtons[index].setEnabled(false);
+    }
 }

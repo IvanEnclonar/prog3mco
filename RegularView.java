@@ -229,7 +229,7 @@ public class RegularView extends JFrame{
         dispenseMoney.addActionListener(actionListener);
     }
 
-    public void DisableButton(){
-        
+    public void DisableButton(int index){
+        FoodButtons[index].setEnabled(false);
     }
 }

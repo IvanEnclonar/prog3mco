@@ -13,6 +13,9 @@ public class SpecialController {
             public void actionPerformed(ActionEvent e) {
                 specialView.moneyDisplay("Balance: P" + svm.box.getTotalUserMoney() + "\n\n" + svm.addToCart(0));
                 specialView.dispenseDisplay(svm.getCart());
+                if(svm.slots[0].getNumItems() == 0){
+                    specialView.DisableButton(0);
+                }
             }
         });
 
@@ -21,6 +24,9 @@ public class SpecialController {
             public void actionPerformed(ActionEvent e) {
                 specialView.moneyDisplay("Balance: P" + svm.box.getTotalUserMoney() + "\n\n" + svm.addToCart(1));
                 specialView.dispenseDisplay(svm.getCart());
+                if(svm.slots[1].getNumItems() == 0){
+                    specialView.DisableButton(1);
+                }
             }
         });
 
@@ -29,6 +35,9 @@ public class SpecialController {
             public void actionPerformed(ActionEvent e) {
                 specialView.moneyDisplay("Balance: P" + svm.box.getTotalUserMoney() + "\n\n" + svm.addToCart(2));
                 specialView.dispenseDisplay(svm.getCart());
+                if(svm.slots[2].getNumItems() == 0){
+                    specialView.DisableButton(2);
+                }
             }
         });
 
@@ -37,6 +46,9 @@ public class SpecialController {
             public void actionPerformed(ActionEvent e) {
                 specialView.moneyDisplay("Balance: P" + svm.box.getTotalUserMoney() + "\n\n" + svm.addToCart(3));
                 specialView.dispenseDisplay(svm.getCart());
+                if(svm.slots[3].getNumItems() == 0){
+                    specialView.DisableButton(3);
+                }
             }
         });
 
@@ -45,6 +57,9 @@ public class SpecialController {
             public void actionPerformed(ActionEvent e) {
                 specialView.moneyDisplay("Balance: P" + svm.box.getTotalUserMoney() + "\n\n" + svm.addToCart(4));
                 specialView.dispenseDisplay(svm.getCart());
+                if(svm.slots[4].getNumItems() == 0){
+                    specialView.DisableButton(4);
+                }
             }
         });
 
@@ -53,6 +68,9 @@ public class SpecialController {
             public void actionPerformed(ActionEvent e) {
                 specialView.moneyDisplay("Balance: P" + svm.box.getTotalUserMoney() + "\n\n" + svm.addToCart(5));
                 specialView.dispenseDisplay(svm.getCart());
+                if(svm.slots[5].getNumItems() == 0){
+                    specialView.DisableButton(5);
+                }
             }
         });
 
@@ -61,6 +79,9 @@ public class SpecialController {
             public void actionPerformed(ActionEvent e) {
                 specialView.moneyDisplay("Balance: P" + svm.box.getTotalUserMoney() + "\n\n" + svm.addToCart(6));
                 specialView.dispenseDisplay(svm.getCart());
+                if(svm.slots[6].getNumItems() == 0){
+                    specialView.DisableButton(6);
+                }
             }
         });
 
@@ -69,6 +90,9 @@ public class SpecialController {
             public void actionPerformed(ActionEvent e) {
                 specialView.moneyDisplay("Balance: P" + svm.box.getTotalUserMoney() + "\n\n" + svm.addToCart(7));
                 specialView.dispenseDisplay(svm.getCart());
+                if(svm.slots[7].getNumItems() == 0){
+                    specialView.DisableButton(7);
+                }
             }
         });
 
@@ -77,6 +101,9 @@ public class SpecialController {
             public void actionPerformed(ActionEvent e) {
                 specialView.moneyDisplay("Balance: P" + svm.box.getTotalUserMoney() + "\n\n" + svm.addToCart(8));
                 specialView.dispenseDisplay(svm.getCart());
+                if(svm.slots[8].getNumItems() == 0){
+                    specialView.DisableButton(8);
+                }
             }
         });
 
@@ -85,6 +112,9 @@ public class SpecialController {
             public void actionPerformed(ActionEvent e) {
                 specialView.moneyDisplay("Balance: P" + svm.box.getTotalUserMoney() + "\n\n" + svm.addToCart(9));
                 specialView.dispenseDisplay(svm.getCart());
+                if(svm.slots[9].getNumItems() == 0){
+                    specialView.DisableButton(9);
+                }
             }
         });
 
@@ -93,6 +123,9 @@ public class SpecialController {
             public void actionPerformed(ActionEvent e) {
                 specialView.moneyDisplay("Balance: P" + svm.box.getTotalUserMoney() + "\n\n" + svm.addToCart(10));
                 specialView.dispenseDisplay(svm.getCart());
+                if(svm.slots[10].getNumItems() == 0){
+                    specialView.DisableButton(10);
+                }
             }
         });
 
@@ -101,6 +134,9 @@ public class SpecialController {
             public void actionPerformed(ActionEvent e) {
                 specialView.moneyDisplay("Balance: P" + svm.box.getTotalUserMoney() + "\n\n" + svm.addToCart(11));
                 specialView.dispenseDisplay(svm.getCart());
+                if(svm.slots[11].getNumItems() == 0){
+                    specialView.DisableButton(11);
+                }
             }
         });
 
