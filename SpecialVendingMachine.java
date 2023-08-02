@@ -85,9 +85,9 @@ public class SpecialVendingMachine extends VendingMachine {
 
         switch (choice) {
             case 1:
-                Item Burger = new Item("Burger", price, cals);
+                Burger b = new Burger(price, cals);
                 for (int i = 0; i < quantity; i++) {
-                    if (!addItem(Burger, 0)) {
+                    if (!addItem(b, 0)) {
                         added = quantity - i + 1;
                         text = "Slot for Burger is full! Added " + added
                                 + " Burger(s) to the inventory.\nTotal pcs. in machine: " + slots[0].getNumItems();
@@ -209,7 +209,7 @@ public class SpecialVendingMachine extends VendingMachine {
 
         switch (choice) {
             case 7:
-                Item FriedEgg = new Item("FriedEgg", price, cals);
+                Addons FriedEgg = new Addons("Fried Egg", price, cals);
                 for (int i = 0; i < quantity; i++) {
                     if (!addItem(FriedEgg, 6)) {
                         added = quantity - i + 1;
@@ -222,7 +222,7 @@ public class SpecialVendingMachine extends VendingMachine {
                         + slots[6].getNumItems();
                 break;
             case 8:
-                Item Lettuce = new Item("Lettuce", price, cals);
+                Addons Lettuce = new Addons("Lettuce", price, cals);
                 for (int i = 0; i < quantity; i++) {
                     if (!addItem(Lettuce, 7)) {
                         added = quantity - i + 1;
@@ -235,7 +235,7 @@ public class SpecialVendingMachine extends VendingMachine {
                         + slots[7].getNumItems();
                 break;
             case 9:
-                Item TomatoSlice = new Item("Tomato Slice", price, cals);
+                Addons TomatoSlice = new Addons("Tomato slice", price, cals);
                 for (int i = 0; i < quantity; i++) {
                     if (!addItem(TomatoSlice, 8)) {
                         added = quantity - i + 1;
@@ -249,7 +249,7 @@ public class SpecialVendingMachine extends VendingMachine {
                         + slots[8].getNumItems();
                 break;
             case 10:
-                Item CheeseSlice = new Item("Cheese Slice", price, cals);
+                Addons CheeseSlice = new Addons("Cheese slice", price, cals);
                 for (int i = 0; i < quantity; i++) {
                     if (!addItem(CheeseSlice, 9)) {
                         added = quantity - i + 1;
@@ -263,7 +263,7 @@ public class SpecialVendingMachine extends VendingMachine {
                         + slots[9].getNumItems();
                 break;
             case 11:
-                Item BaconStrip = new Item("Bacon Strip", price, cals);
+                Addons BaconStrip = new Addons("Bacon strip", price, cals);
                 for (int i = 0; i < quantity; i++) {
                     if (!addItem(BaconStrip, 10)) {
                         added = quantity - i + 1;
@@ -277,7 +277,7 @@ public class SpecialVendingMachine extends VendingMachine {
                         + slots[10].getNumItems();
                 break;
             case 12:
-                Item PickleSlice = new Item("Pickle Slice", price, cals);
+                Addons PickleSlice = new Addons("Pickle slice", price, cals);
                 for (int i = 0; i < quantity; i++) {
                     if (!addItem(PickleSlice, 11)) {
                         added = quantity - i + 1;
@@ -308,6 +308,31 @@ public class SpecialVendingMachine extends VendingMachine {
                 return "You can only buy one Burger";
             } else if (slotNum >= 6 && boughtBurger == false) {
                 return "You need to buy a Burger first";
+            } else if (slotNum >= 6 && boughtBurger == true) {
+                // check cart for burger
+                for (int i = 0; i < cart.size(); i++) {
+                    if (cart.get(i) instanceof Burger) {
+                        Burger b = (Burger) cart.get(i);
+                        Addons a = (Addons) slots[slotNum].checkSlot();
+                        b.addAddons(a);
+                    }
+                }
+                switch (slotNum) {
+                    case 6:
+                        return "Frying egg... Added to cart.";
+                    case 7:
+                        return "Shredding lettuce... Added to cart.";
+                    case 8:
+                        return "Slicing tomato... Added to cart.";
+                    case 9:
+                        return "Slicing cheese... Added to cart.";
+                    case 10:
+                        return "Frying bacon... Added to cart.";
+                    case 11:
+                        return "Slicing pickle... Added to cart.";
+                    default:
+                        return "Error";
+                }
             } else {
                 cart.add(slots[slotNum].removeItem());
                 switch (slotNum) {
@@ -379,10 +404,20 @@ public class SpecialVendingMachine extends VendingMachine {
                 text = "Insufficient money";
             } else if (box.haveChange(getTotalPrice())) {
                 money = money - getTotalPrice();
-                text = "You bought ";
+                text = "You bought: \n";
                 for (int i = 0; i < cart.size(); i++) {
-                    transactions.recordTransaction(cart.get(i));
-                    text += cart.get(i).getName() + ", ";
+                    if (cart.get(i) instanceof Burger) {
+                        Burger b = (Burger) cart.get(i);
+                        text += b.getName() + "\n";
+                        for (int j = 0; j < b.getAddons().size(); j++) {
+                            transactions.recordTransaction(b.getAddons().get(j));
+                        }
+                        b.clearAddons();
+                        transactions.recordTransaction(b);
+                    } else {
+                        transactions.recordTransaction(cart.get(i));
+                        text += cart.get(i).getName() + "\n ";
+                    }
                     // Edit this after
                 }
                 cart.clear();

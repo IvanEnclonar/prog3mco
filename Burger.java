@@ -39,6 +39,15 @@ public class Burger extends Item {
         return false;
     }
 
+    public void clearAddons() {
+        addons.clear();
+    }
+
+    public ArrayList<Addons> getAddons() {
+        return addons;
+    }
+
+    @Override
     public String getName() {
         // Cheeseburger (2 Cheese slices)
         if (checkNumberofAddons("Cheese slice") == 2 && addons.size() == 2) {
@@ -114,6 +123,7 @@ public class Burger extends Item {
         }
     }
 
+    @Override
     public int getPrice() {
         int price = super.getPrice();
         for (int i = 0; i < addons.size(); i++) {
@@ -122,6 +132,7 @@ public class Burger extends Item {
         return price;
     }
 
+    @Override
     public float getCalories() {
         float calories = super.getCalories();
         for (int i = 0; i < addons.size(); i++) {
