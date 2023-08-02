@@ -402,7 +402,8 @@ public class SpecialVendingMachine extends VendingMachine {
         } else {
             if (money < getTotalPrice()) {
                 text = "Insufficient money";
-            } else if (box.haveChange(getTotalPrice())) {
+            } 
+            else if (box.haveChange(getTotalPrice())) {
                 money = money - getTotalPrice();
                 text = "You bought: \n";
                 for (int i = 0; i < cart.size(); i++) {
