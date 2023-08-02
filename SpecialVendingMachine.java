@@ -6,8 +6,8 @@ public class SpecialVendingMachine extends VendingMachine {
     boolean boughtBurger = false;
     String itemNamesList[] = { "Regular Burger", "Fries", "Sundae",
             "Coke", "Diet coke", "Sprite",
-            "Fried egg", "Lettuce", "Tomato Slice",
-            "Cheese Slice", "Bacon Strip", "Pickle Slice" };
+            "Fried egg", "Lettuce", "Tomato slice",
+            "Cheese slice", "Bacon strip", "Pickle slice" };
 
     public SpecialVendingMachine() {
         for (int i = 0; i < slots.length; i++) {
@@ -26,7 +26,6 @@ public class SpecialVendingMachine extends VendingMachine {
 
     @Override
     public String displayTransactions() {
-        System.out.println("SIZE" + transactions.getSize());
         String text = "";
         text += "+-------------------------------------------------------------------------------------------------------------------------------------------+";
         text += "\n|                           Item Name                       |         Initital         |     Remaining     |     Sold     |       Total Sales       |";

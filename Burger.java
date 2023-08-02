@@ -74,6 +74,7 @@ public class Burger extends Item {
      */
     public void clearAddons() {
         addons.clear();
+        this.name = "Regular Burger";
     }
 
     /**
@@ -126,10 +127,11 @@ public class Burger extends Item {
             return name;
         } else {
             if (addons.size() == 0) {
-                return name;
+                this.name = "Regular Burger";
+                return this.name;
             } else if (addons.size() == 1) {
                 this.name = "Custom Burger with " + addons.get(0).getName() + ".";
-                return name;
+                return this.name;
             } else {
                 this.name = "Custom Burger with ";
                 if (exists("Cheese slice")) {
