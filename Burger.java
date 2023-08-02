@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 
 /**
- * Represents a Burger Item.
+ * Represents a Burger Item. This item can have addons and the addons modify the
+ * price, calories, and name of the burger.
  * Stored in the Vending Machine and extends the Item Class,
  */
 public class Burger extends Item {
@@ -163,6 +164,12 @@ public class Burger extends Item {
         }
     }
 
+    /**
+     * Gets the total price of the burger. This considers the price of the addons to
+     * the total price.
+     * 
+     * @return price of the burger
+     */
     @Override
     public int getPrice() {
         int price = super.getPrice();
@@ -172,6 +179,12 @@ public class Burger extends Item {
         return price;
     }
 
+    /**
+     * Gets the total calories of the burger. This considers the calories of the
+     * addons to the total calories.
+     * 
+     * @return calories of the burger
+     */
     @Override
     public float getCalories() {
         float calories = super.getCalories();
