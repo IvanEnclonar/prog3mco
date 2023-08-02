@@ -17,7 +17,7 @@ public class SpecialView extends JFrame {
         super("Special Vending Machine");
         this.vm = (SpecialVendingMachine) vm;
         setSize(630, 1025);
-        setResizable(true);
+        setResizable(false);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(new FlowLayout());
 
@@ -57,9 +57,10 @@ public class SpecialView extends JFrame {
                 FoodButtons[i].setPreferredSize(new Dimension(200, 150));
                 add(FoodButtons[i]);
             } else {
-                FoodButtons[i] = new JButton("Item Unavailable");
+                FoodButtons[i] = new JButton(getIcon(i));
                 FoodButtons[i].setPreferredSize(new Dimension(200, 150));
                 add(FoodButtons[i]);
+                FoodButtons[i].setEnabled(false);
             }
         }
     }
@@ -72,9 +73,10 @@ public class SpecialView extends JFrame {
                 FoodButtons[i].setPreferredSize(new Dimension(200, 150));
                 add(FoodButtons[i]);
             } else {
-                FoodButtons[i] = new JButton("Item Unavailable");
+                FoodButtons[i] = new JButton(getIcon(i));
                 FoodButtons[i].setPreferredSize(new Dimension(200, 150));
                 add(FoodButtons[i]);
+                FoodButtons[i].setEnabled(false);
             }
         }
     }
@@ -84,7 +86,15 @@ public class SpecialView extends JFrame {
         int price = vm.slots[i].checkSlot().getPrice();
         float cal = vm.slots[i].checkSlot().getCalories();
         String string = cal + " cal\nPhp " + price;
-        switch (i) {
+        FoodButtons[i].setIcon(getIcon(i));
+        FoodButtons[i].setText("<html><center>" + string.replaceAll("\\n", "<br>") + "</html>");
+        FoodButtons[i].setHorizontalTextPosition(JButton.CENTER);
+        FoodButtons[i].setVerticalTextPosition(JButton.BOTTOM);
+    }
+
+    public Icon getIcon(int itemIndex){
+        Icon icon = null;
+        switch (itemIndex) {
             case 0:
                 icon = new ImageIcon(getClass().getResource("icons/burger.png"));
                 break;
@@ -122,10 +132,7 @@ public class SpecialView extends JFrame {
                 icon = new ImageIcon(getClass().getResource("icons/pickle.png"));
                 break;
         }
-        FoodButtons[i].setIcon(icon);
-        FoodButtons[i].setText("<html><center>" + string.replaceAll("\\n", "<br>") + "</html>");
-        FoodButtons[i].setHorizontalTextPosition(JButton.CENTER);
-        FoodButtons[i].setVerticalTextPosition(JButton.BOTTOM);
+        return icon;
     }
 
     public void MoneyButtons() {
