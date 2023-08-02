@@ -17,7 +17,7 @@ public class SpecialView extends JFrame {
         super("Special Vending Machine");
         this.vm = (SpecialVendingMachine) vm;
         setSize(630, 1025);
-        setResizable(false);
+        setResizable(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(new FlowLayout());
 
