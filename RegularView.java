@@ -58,82 +58,43 @@ public class RegularView extends JFrame{
     }
 
     public void FoodButtons(int i){
+        Icon icon = null;
+        int price = vm.slots[i].checkSlot().getPrice();
+        float cal = vm.slots[i].checkSlot().getCalories();
+        String string = cal + " cal\nPhp " + price;
         switch(i){
             case 0:
-                int cokePrice = vm.slots[0].checkSlot().getPrice();
-                float cokeCal = vm.slots[0].checkSlot().getCalories();
-                String cokeString = cokeCal + " cal\nPhp " + cokePrice;
-                Icon cokeIcon = new ImageIcon(getClass().getResource("icons/coke.png"));
-                FoodButtons[i].setIcon(cokeIcon);
-                FoodButtons[i].setText("<html><center>" + cokeString.replaceAll("\\n", "<br>") + "</html>");
-                FoodButtons[i].setHorizontalTextPosition(JButton.CENTER);
-                FoodButtons[i].setVerticalTextPosition(JButton.BOTTOM);
+                icon = new ImageIcon(getClass().getResource("icons/coke.png"));
                 break;
             case 1:
-                int spritePrice = vm.slots[1].checkSlot().getPrice();
-                float spriteCal = vm.slots[1].checkSlot().getCalories();
-                String spriteString = spriteCal + " cal\nPhp " + spritePrice;
-                Icon spriteIcon = new ImageIcon(getClass().getResource("icons/sprite.png"));
-                FoodButtons[i].setIcon(spriteIcon);
-                FoodButtons[i].setText("<html><center>" + spriteString.replaceAll("\\n", "<br>") + "</html>");
-                FoodButtons[i].setHorizontalTextPosition(JButton.CENTER);
-                FoodButtons[i].setVerticalTextPosition(JButton.BOTTOM);
+                icon = new ImageIcon(getClass().getResource("icons/sprite.png"));
                 break;
             case 2:
-                int royalPrice = vm.slots[2].checkSlot().getPrice();
-                float royalCal = vm.slots[2].checkSlot().getCalories();
-                String royalString = royalCal + " cal\nPhp " + royalPrice;
-                FoodButtons[i].setText("<html><center>" + royalString.replaceAll("\\n", "<br>") + "</html>");
+                string = string +"\nroyal";
                 break;
             case 3:
-                int dietCokePrice = vm.slots[3].checkSlot().getPrice();
-                float dietCokeCal = vm.slots[3].checkSlot().getCalories();
-                String dietCokeString = dietCokeCal + " cal\nPhp " + dietCokePrice;
-                Icon dietCokeIcon = new ImageIcon(getClass().getResource("icons/diet coke.png"));
-                FoodButtons[i].setIcon(dietCokeIcon);
-                FoodButtons[i].setText("<html><center>" + dietCokeString.replaceAll("\\n", "<br>") + "</html>");
-                FoodButtons[i].setHorizontalTextPosition(JButton.CENTER);
-                FoodButtons[i].setVerticalTextPosition(JButton.BOTTOM);
+                icon = new ImageIcon(getClass().getResource("icons/diet coke.png"));
                 break;
             case 4:
-                int cheeseBurgerPrice = vm.slots[4].checkSlot().getPrice();
-                float cheeseBurgerCal = vm.slots[4].checkSlot().getCalories();
-                String cheeseBurgerString = cheeseBurgerCal + " cal\nPhp " + cheeseBurgerPrice;
-                FoodButtons[i].setText("<html><center>" + cheeseBurgerString.replaceAll("\\n", "<br>") + "</html>");
+                string = string +"\ncheese burger";
                 break;
             case 5:
-                int chickenBurgerPrice = vm.slots[5].checkSlot().getPrice();
-                float chickenBurgerCal = vm.slots[5].checkSlot().getCalories();
-                String chickenBurgerString = chickenBurgerCal + " cal\nPhp " + chickenBurgerPrice;
-                FoodButtons[i].setText("<html><center>" + chickenBurgerString.replaceAll("\\n", "<br>") + "</html>");
+                string = string +"\nchicken burger";
                 break;
             case 6:
-                int baconBurgerPrice = vm.slots[6].checkSlot().getPrice();
-                float baconBurgerCal = vm.slots[6].checkSlot().getCalories();
-                String baconBurgerString = baconBurgerCal + " cal\nPhp " + baconBurgerPrice;
-                FoodButtons[i].setText("<html><center>" + baconBurgerString.replaceAll("\\n", "<br>") + "</html>");
+                string = string +"\nbacon burger";
                 break;
             case 7:
-                int friesPrice = vm.slots[7].checkSlot().getPrice();
-                float friesCal = vm.slots[7].checkSlot().getCalories();
-                String friesString = friesCal + " cal\nPhp " + friesPrice;
-                Icon friesIcon = new ImageIcon(getClass().getResource("icons/fries.png"));
-                FoodButtons[i].setIcon(friesIcon);
-                FoodButtons[i].setText("<html><center>" + friesString.replaceAll("\\n", "<br>") + "</html>");
-                FoodButtons[i].setHorizontalTextPosition(JButton.CENTER);
-                FoodButtons[i].setVerticalTextPosition(JButton.BOTTOM);
+                icon = new ImageIcon(getClass().getResource("icons/fries.png"));
                 break;
             case 8:
-                int sundaePrice = vm.slots[8].checkSlot().getPrice();
-                float sundaeCal = vm.slots[8].checkSlot().getCalories();
-                String sundaeString = sundaeCal + " cal\nPhp " + sundaePrice;
-                Icon sundaeIcon = new ImageIcon(getClass().getResource("icons/sundae.png"));
-                FoodButtons[i].setIcon(sundaeIcon);
-                FoodButtons[i].setText("<html><center>" + sundaeString.replaceAll("\\n", "<br>") + "</html>");
-                FoodButtons[i].setHorizontalTextPosition(JButton.CENTER);
-                FoodButtons[i].setVerticalTextPosition(JButton.BOTTOM);
+                icon = new ImageIcon(getClass().getResource("icons/sundae.png"));
                 break;
         }
+        FoodButtons[i].setIcon(icon);
+        FoodButtons[i].setText("<html><center>" + string.replaceAll("\\n", "<br>") + "</html>");
+        FoodButtons[i].setHorizontalTextPosition(JButton.CENTER);
+        FoodButtons[i].setVerticalTextPosition(JButton.BOTTOM);
     }
 
     public void MoneyButtons(){

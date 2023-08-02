@@ -11,35 +11,33 @@ public class SpecialView extends JFrame {
             money200, money500, money1k;
     private JTextArea dispense, money;
     private JButton confirmPurchase, cancel;
-    private VendingMachine vm;
+    private SpecialVendingMachine vm;
 
     public SpecialView(VendingMachine vm) {
         super("Special Vending Machine");
-        this.vm = vm;
-        setSize(630, 1075);
+        this.vm = (SpecialVendingMachine) vm;
+        setSize(630, 1025);
         setResizable(false);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(new FlowLayout());
 
         addFoodButtons();
 
-        add(Box.createRigidArea(new Dimension(600, 10)));
         add(Box.createRigidArea(new Dimension(250, 10)));
         add(addOns);
         add(Box.createRigidArea(new Dimension(250, 10)));
         addOnButtons();
 
-        add(Box.createRigidArea(new Dimension(600, 15)));
         add(Box.createRigidArea(new Dimension(250, 10)));
         add(insertMoney);
         add(Box.createRigidArea(new Dimension(250, 10)));
         MoneyButtons();
 
-        add(Box.createRigidArea(new Dimension(600, 15)));
+        add(Box.createRigidArea(new Dimension(600, 5)));
 
         Display();
 
-        add(Box.createRigidArea(new Dimension(600, 15)));
+        add(Box.createRigidArea(new Dimension(600, 5)));
 
         confirmPurchase = new JButton("Confirm purchase");
         confirmPurchase.setPreferredSize(new Dimension(600, 30));
@@ -53,18 +51,83 @@ public class SpecialView extends JFrame {
 
     public void addFoodButtons() {
         for (int i = 0; i < 6; i++) {
-            FoodButtons[i] = new JButton("Item is unavailable");
-            FoodButtons[i].setPreferredSize(new Dimension(200, 150));
-            add(FoodButtons[i]);
+            if(vm.slots[i].getNumItems() != 0){
+                FoodButtons[i] = new JButton();
+                FoodButtons(i);
+                FoodButtons[i].setPreferredSize(new Dimension(200, 150));
+                add(FoodButtons[i]);
+            }
+            else{
+                FoodButtons[i] = new JButton("Item Unavailable");
+                FoodButtons[i].setPreferredSize(new Dimension(200, 150));
+                add(FoodButtons[i]);
+            }
         }
     }
 
     public void addOnButtons() {
         for (int i = 6; i < 12; i++) {
-            FoodButtons[i] = new JButton("Item is unavailable");
-            FoodButtons[i].setPreferredSize(new Dimension(200, 150));
-            add(FoodButtons[i]);
+            if(vm.slots[i].getNumItems() != 0){
+                FoodButtons[i] = new JButton();
+                FoodButtons(i);
+                FoodButtons[i].setPreferredSize(new Dimension(200, 150));
+                add(FoodButtons[i]);
+            }
+            else{
+                FoodButtons[i] = new JButton("Item Unavailable");
+                FoodButtons[i].setPreferredSize(new Dimension(200, 150));
+                add(FoodButtons[i]);
+            }
         }
+    }
+
+    public void FoodButtons(int i) {
+        Icon icon = null;
+        int price = vm.slots[i].checkSlot().getPrice();
+        float cal = vm.slots[i].checkSlot().getCalories();
+        String string = cal + " cal\nPhp " + price;
+        switch(i){
+            case 0:
+                string = string + "\nburger";
+                break;
+            case 1:
+                icon = new ImageIcon(getClass().getResource("icons/fries.png"));
+                break;
+            case 2:
+                icon = new ImageIcon(getClass().getResource("icons/sundae.png"));
+                break;
+            case 3:
+                icon = new ImageIcon(getClass().getResource("icons/coke.png"));
+                break;
+            case 4:
+                icon = new ImageIcon(getClass().getResource("icons/diet coke.png"));
+                break;
+            case 5:
+                icon = new ImageIcon(getClass().getResource("icons/sprite.png"));
+                break;
+            case 6:
+                string = string + "\nfried egg";
+                break;
+            case 7:
+                string = string + "\nlettuce";
+                break;
+            case 8:
+                string = string + "\ntomato slice";
+                break;
+            case 9:
+                string = string + "\ncheese slice";
+                break;
+            case 10:
+                string = string + "\nbacon strip";
+                break;
+            case 11:
+                string = string + "\npickle slice";
+                break;
+        }
+        FoodButtons[i].setIcon(icon);
+        FoodButtons[i].setText("<html><center>" + string.replaceAll("\\n", "<br>") + "</html>");
+        FoodButtons[i].setHorizontalTextPosition(JButton.CENTER);
+        FoodButtons[i].setVerticalTextPosition(JButton.BOTTOM);
     }
 
     public void MoneyButtons() {
