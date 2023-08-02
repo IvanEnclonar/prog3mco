@@ -1,8 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.Action;
-
 public class SMaintenanceController {
     private SMaintenanceView smv;
     private SpecialVendingMachine svm;

@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 
-import javax.swing.ButtonGroup;
-
 public class SpecialVendingMachine extends VendingMachine {
     private ArrayList<Item> cart = new ArrayList<Item>();
     Slot[] slots = new Slot[12];
