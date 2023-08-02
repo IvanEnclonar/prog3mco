@@ -5,5 +5,7 @@ public class GUITestDriver {
         FactoryController controller = new FactoryController(view, model);
 
         //SpecialView view = new SpecialView(model.getVM());
+        //SpecialVendingMachine svm = (SpecialVendingMachine) model.getVM();
+        //SMaintenanceView view = new SMaintenanceView(svm);
     }
 }

@@ -77,6 +77,5 @@ public class RMaintenanceController {
                 rmv.moneyTextDisplay(model.getVM().box.collectMoney());
             }
         });
-
     }
 }

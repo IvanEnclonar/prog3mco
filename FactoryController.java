@@ -51,7 +51,6 @@ public class FactoryController {
                         factoryView.display("Testing Special Vending Machine.");
                         SpecialView svm = new SpecialView(model.getVM());
                         SpecialController svmController = new SpecialController(svm, model);
-                        // add special controller here when created
                     } else {
                         factoryView.display("Testing Regular Vending Machine.");
                         RegularView rvm = new RegularView(model.getVM());
@@ -69,6 +68,8 @@ public class FactoryController {
                 if (model.vmExists()) {
                     if (model.isSpecial()) {
                         factoryView.display("Maintaining Special Vending Machine.");
+                        SMaintenanceView smv = new SMaintenanceView(model.getVM());
+                        SMaintenanceController smvController = new SMaintenanceController(smv, model);
                     } else {
                         factoryView.display("Maintaining Regular Vending Machine.");
                         RMaintenanceView rmv = new RMaintenanceView(model.getVM());
