@@ -14,8 +14,6 @@ public class SMaintenanceController {
         this.smv = smv;
         svm = (SpecialVendingMachine) model.getVM();
 
-        svm.transactions.clearTransactions();
-
         this.smv.viewInventoryListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -35,11 +33,11 @@ public class SMaintenanceController {
                     else{
                         if (slotNum <= 6){
                             smv.foodTextDisplay(svm.restockStandAlones(slotNum, quantity));
-                            model.getVM().transactions.clearTransactions();
+                            svm.transactions.clearTransactions();
                         }
                         else if (slotNum <= 12){
                             smv.foodTextDisplay(svm.restockAddOns(slotNum, quantity));
-                            model.getVM().transactions.clearTransactions();
+                            svm.transactions.clearTransactions();
                         }
                         else{
                             smv.foodTextDisplay("Invalid input.");

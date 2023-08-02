@@ -15,6 +15,9 @@ public class RegularController{
                 if (model.getVM().box.getTotalUserMoney() > 0 && model.getVM().box.haveChange(model.getVM().slots[0].checkSlot().getPrice())){
                     regularView.dispenseDisplay(model.getVM().buyItem(0)+"\n\n"+model.getVM().box.dispenseChange());
                     regularView.moneyDisplay("Dispensing...\n\nBalance: P"+String.valueOf(model.getVM().box.getTotalUserMoney()));
+                    if(model.getVM().slots[0].getNumItems() == 0){
+                        //regularView.DisableButton(0);
+                    }
                 }
                 else if(model.getVM().box.getTotalUserMoney() <= 0){
                     regularView.dispenseDisplay("");

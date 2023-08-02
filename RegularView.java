@@ -228,4 +228,8 @@ public class RegularView extends JFrame{
     public void dispenseMoneyListener(ActionListener actionListener){
         dispenseMoney.addActionListener(actionListener);
     }
+
+    public void DisableButton(){
+        
+    }
 }

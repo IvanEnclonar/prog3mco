@@ -179,8 +179,9 @@ public class SpecialController {
         this.specialView.confirmListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                specialView.moneyDisplay("Balance: P" + svm.box.getTotalUserMoney() + "\n\n" + svm.buy());
-                specialView.dispenseDisplay(svm.getCart());
+                specialView.dispenseDisplay(svm.buy()+"\n\n"+svm.getCart());
+                specialView.moneyDisplay("Dispensing change...\n\nBalance: P" + svm.box.getTotalUserMoney() + "\n\n");
+                
             }
         });
 

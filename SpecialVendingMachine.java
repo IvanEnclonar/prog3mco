@@ -434,10 +434,10 @@ public class SpecialVendingMachine extends VendingMachine {
         String text = "";
         money = money + box.getTotalUserMoney();
         if (cart.size() == 0) {
-            text = "Cart is empty";
+            text = "Cart is empty.";
         } else {
             if (money < getTotalPrice()) {
-                text = "Insufficient money";
+                text = "Insufficient money.\n\n"+box.dispenseChange();
             } else if (box.haveChange(getTotalPrice())) {
 
                 money = money - getTotalPrice();
@@ -457,9 +457,9 @@ public class SpecialVendingMachine extends VendingMachine {
                     }
                     // Edit this after
                 }
+                boughtBurger = false;
                 cart.clear();
-                text = text + "\n\nDispensing change...";
-                text = text + "\n\nChange dispensed: " + box.getChange(getTotalPrice());
+                text = text + "\n\n" + box.dispenseChange();
             } else {
                 text = "No change available in the machine.";
             }
