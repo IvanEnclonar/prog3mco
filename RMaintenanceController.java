@@ -1,8 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.Action;
-
 public class RMaintenanceController {
     private RMaintenanceView rmv;
     String itemNamesList[] = { "Coke", "Sprite", "Royal",
@@ -23,19 +21,37 @@ public class RMaintenanceController {
         this.rmv.restockItemListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int slotNum = Integer.parseInt(rmv.getItemIndex());
-                int quantity = Integer.parseInt(rmv.getItemQuantity());
-                rmv.foodTextDisplay(model.getVM().restockItems(slotNum, quantity));
-                model.getVM().transactions.clearTransactions();
+                try {
+                    int slotNum = Integer.parseInt(rmv.getItemIndex());
+                    int quantity = Integer.parseInt(rmv.getItemQuantity());
+                    if (slotNum <= 0 || quantity <= 0){
+                        rmv.foodTextDisplay("Invalid input.");
+                    }
+                    else{
+                        rmv.foodTextDisplay(model.getVM().restockItems(slotNum, quantity));
+                        model.getVM().transactions.clearTransactions();
+                    }
+                } catch (Exception err) {
+                    rmv.foodTextDisplay("Invalid input.");
+                }       
             }
         });
 
         this.rmv.changePriceListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int slotNum = Integer.parseInt(rmv.getItemIndex());
-                int newPrice = Integer.parseInt(rmv.getNewPrice());
-                rmv.foodTextDisplay(model.getVM().changePrice(slotNum, newPrice));
+                try {
+                    int slotNum = Integer.parseInt(rmv.getItemIndex());
+                    int newPrice = Integer.parseInt(rmv.getNewPrice());
+                    if (slotNum <= 0 || newPrice < 0){
+                        rmv.foodTextDisplay("Invalid input.");
+                    }
+                    else{
+                        rmv.foodTextDisplay(model.getVM().changePrice(slotNum, newPrice));
+                    }
+                } catch (Exception err) {
+                    rmv.foodTextDisplay("Invalid input.");
+                }
             }
         });
 
@@ -49,10 +65,18 @@ public class RMaintenanceController {
         this.rmv.restockMoneyListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                denomination = Integer.parseInt(rmv.getDenomination());
-                count = Integer.parseInt(rmv.getMoneyQuantity());
-                rmv.moneyTextDisplay(model.getVM().box.restockingMoney(denomination, count));
-                ;
+                try {
+                    denomination = Integer.parseInt(rmv.getDenomination());
+                    count = Integer.parseInt(rmv.getMoneyQuantity());
+                    if (count <= 0 || denomination <= 0){
+                        rmv.moneyTextDisplay("Invalid input.");
+                    }
+                    else{
+                        rmv.moneyTextDisplay(model.getVM().box.restockingMoney(denomination, count));
+                    }
+                } catch (Exception err) {
+                    rmv.moneyTextDisplay("Invalid input.");
+                }
             }
         });
 

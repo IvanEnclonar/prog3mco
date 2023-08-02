@@ -1,18 +1,38 @@
 import java.util.ArrayList;
 
+/**
+ * Represents a Burger Item.
+ * Stored in the Vending Machine and extends the Item Class,
+ */
 public class Burger extends Item {
     ArrayList<Addons> addons = new ArrayList<Addons>();
     private String name;
 
+    /**
+     * Creates a new Burger
+     * 
+     * @param price    price of the burger
+     * @param calories caloric value of the burger
+     */
     public Burger(int price, float calories) {
         super("Regular Burger", price, calories);
         this.name = "Regular Burger";
     }
 
+    /**
+     * Adds an add-on to the burger
+     * 
+     * @param addon add-on to be added
+     */
     public void addAddons(Addons addon) {
         addons.add(addon);
     }
 
+    /**
+     * Checks if there are multiple addons of the same type
+     * 
+     * @return string for that addon
+     */
     private String checkPlural(String name, int count) {
         if (count > 1) {
             return count + " " + name + "s";
@@ -20,6 +40,11 @@ public class Burger extends Item {
         return "a " + name;
     }
 
+    /**
+     * Gets number of a specific addon
+     * 
+     * @return number of addons
+     */
     private int checkNumberofAddons(String name) {
         int count = 0;
         for (int i = 0; i < addons.size(); i++) {
@@ -30,6 +55,11 @@ public class Burger extends Item {
         return count;
     }
 
+    /**
+     * Checks if an addon exists
+     * 
+     * @return true if addon exists, false otherwise
+     */
     private boolean exists(String name) {
         for (int i = 0; i < addons.size(); i++) {
             if (addons.get(i).getName().equals(name)) {
@@ -39,10 +69,18 @@ public class Burger extends Item {
         return false;
     }
 
+    /**
+     * Clears all addons
+     */
     public void clearAddons() {
         addons.clear();
     }
 
+    /**
+     * Gets the addons
+     * 
+     * @return addons
+     */
     public ArrayList<Addons> getAddons() {
         return addons;
     }
@@ -114,8 +152,8 @@ public class Burger extends Item {
                     this.name = this.name + checkPlural("Pickle slice", checkNumberofAddons("Pickle slice"))
                             + ", ";
                 }
-                if (exists("Toast")) {
-                    this.name = this.name + checkPlural("Toast", checkNumberofAddons("Toast"))
+                if (exists("Fried Egg")) {
+                    this.name = this.name + checkPlural("Fried Egg", checkNumberofAddons("Fried Egg"))
                             + ", ";
                 }
                 return this.name;

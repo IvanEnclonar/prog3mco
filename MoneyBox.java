@@ -1,3 +1,8 @@
+/**
+ * This class is used to keep track of the bills and coins in the vending
+ * machine. It is also used to check if the user has inserted enough money to
+ * buy an item, and to return change to the user.
+ */
 public class MoneyBox {
     // Instance variables
     private int[] money = { 0, 0, 0, 0, 0, 0, 0, 0, 0 }; // The bills and coins that the machine has in 1 5 10 20 50 100
@@ -7,9 +12,18 @@ public class MoneyBox {
                                                           // money.
     private int totalUserMoney = 0; // The total amount of money that the user has inserted into the machine.
 
+    /**
+     * Constructor for MoneyBox
+     */
     public MoneyBox() {
     }
 
+    /**
+     * Inserts money into the vending machine
+     * 
+     * @param i the denomination to be inserted
+     * @return text to be displayed in the vending machine's money display
+     */
     public String insertMoney(int i){
         String text = "";
         switch (i) {
@@ -72,6 +86,13 @@ public class MoneyBox {
         return text;
     }
 
+
+    /**
+     * Checks if there is enough change in the machine to dispense to the user.
+     * 
+     * @param productTotal The total cost of the product that the user wants to buy
+     * @return true if there is enough change, false if there is not enough change
+     */
     public boolean haveChange(int productTotal) {
         int toDispense = totalUserMoney - productTotal;
         int[] tempMoney = money;
@@ -132,9 +153,11 @@ public class MoneyBox {
         }
     }
 
+    /**
+     * Dispenses the change to the user.
+     */
     public String dispenseChange() {
         String text = "Change: ";
-
         // Loop through money array and dispense the change, decrement corresponding
         // denomination in money array
         for (int i = 0; i < 9; i++) {
@@ -195,6 +218,11 @@ public class MoneyBox {
         return text;
     }
 
+    /**
+     * Collects all the money in this MoneyBox
+     * 
+     * @return confirmation message if money is collected or not
+     */
     public String collectMoney() {
         String text = "";
         int count = 0;
@@ -215,6 +243,13 @@ public class MoneyBox {
         return text;
     }
 
+    /**
+     * Adds to the money array given denomination and number to
+     * add
+     * 
+     * @param money denomination of money to add
+     * @param count number of money to add
+     */
     public String restockingMoney(int money, int count) {
         String text = "Error in restocking. ";
         switch (money) {
@@ -261,102 +296,31 @@ public class MoneyBox {
         return text;
     }
 
-    /*public String collectDenomination(int money, int count) {
-        String text = "Error in collecting.";
-        switch (money) {
-            case 1:
-                if (this.money[0] <= count){
-                    this.money[0] = this.money[0] - count;
-                    text = "Collected " + count + " pcs. of 1-peso.\nTotal: " + count * 1 + " pesos.";
-                }
-                else if(this.money[0] == 0){
-                    text = "Nothing to collect.";
-                }
-                break;
-            case 5:
-                if (this.money[1] <= count){
-                    this.money[1] = this.money[1] - count;
-                    text = "Collected " + count + " pcs. of 5-peso.\nTotal: " + count * 5 + " pesos.";
-                }
-                else if(this.money[1] == 0){
-                    text = "Nothing to collect.";
-                }
-                break;
-            case 10:
-                if (this.money[2] <= count){
-                    this.money[2] = this.money[2] - count;
-                    text = "Collected " + count + " pcs. of 10-peso.\nTotal: " + count * 10 + " pesos.";
-                }
-                else if(this.money[2] == 0){
-                    text = "Nothing to collect.";
-                }
-                break;
-            case 20:
-                if (this.money[3] <= count){
-                    this.money[3] = this.money[3] - count;
-                    text = "Collected " + count + " pcs. of 20-peso.\nTotal: " + count * 20 + " pesos.";
-                }
-                else if(this.money[3] == 0){
-                    text = "Nothing to collect.";
-                }
-                break;
-            case 50:
-                if (this.money[4] <= count){
-                    this.money[4] = this.money[4] - count;
-                    text = "Collected " + count + " pcs. of 50-peso.\nTotal: " + count * 50 + " pesos.";
-                }
-                else if(this.money[4] == 0){
-                    text = "Nothing to collect.";
-                }
-                break;
-            case 100:
-                if (this.money[5] <= count){
-                    this.money[5] = this.money[5] - count;
-                    text = "Collected " + count + " pcs. of 100-peso.\nTotal: " + count * 100 + " pesos.";
-                }
-                else if(this.money[5] == 0){
-                    text = "Nothing to collect.";
-                }
-                break;
-            case 200:
-                if (this.money[6] <= count){
-                    this.money[6] = this.money[6] - count;
-                    text = "Collected " + count + " pcs. of 200-peso.\nTotal: " + count * 200 + " pesos.";
-                }
-                else if(this.money[6] == 0){
-                    text = "Nothing to collect.";
-                }
-                break;
-            case 500:
-                if (this.money[7] <= count){
-                    this.money[7] = this.money[7] - count;
-                    text = "Collected " + count + " pcs. of 500-peso.\nTotal: " + count * 500 + " pesos.";
-                }
-                else if(this.money[7] == 0){
-                    text = "Nothing to collect.";
-                }
-                break;
-            case 1000:
-                if (this.money[8] <= count){
-                    this.money[8] = this.money[8] - count;
-                    text = "Collected " + count + " pcs. of 1000-peso.\nTotal: " + count * 1000 + " pesos.";
-                }
-                else if(this.money[8] == 0){
-                    text = "Nothing to collect.";
-                }
-                break;
-        }
-        return text;
-    } */
-
+    /**
+     * Returns the content of a element in the money array
+     * 
+     * @param index of element to be returned
+     * @return the content of the element
+     */
     public int getMoney(int i) {
         return this.money[i];
     }
 
+    /**
+     * Returns the content of a element in the change array
+     * 
+     * @param index of element to be returned
+     * @return the content of the element
+     */
     public int getChange(int i){
         return this.change[i];
     }
 
+    /**
+     * Returns the money that the user has
+     * 
+     * @return totalUserMoney
+     */
     public int getTotalUserMoney() {
         return totalUserMoney;
     }

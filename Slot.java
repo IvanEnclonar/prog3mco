@@ -175,6 +175,11 @@ public class Slot {
         return numItems;
     }
 
+    /**
+     * Getter function for the slot number.
+     * 
+     * @return The slot number
+     */
     public int getSlotNumber() {
         return slotNumber;
     }

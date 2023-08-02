@@ -1,3 +1,8 @@
+/**
+ * This class is used to create a vending machine object. It simulates a vending
+ * machine in real life and allows the user to add items to the machine, add
+ * money to the machine, and purchase items from the machine.
+ */
 public class VendingMachine {
     Slot[] slots = new Slot[9];
     int money = 0;
@@ -8,12 +13,24 @@ public class VendingMachine {
             "Fries", "Sundae" };
     boolean didRestock = false;
 
+    /**
+     * Constructor for VendingMachine. It initializes the slots array.
+     */
     public VendingMachine() {
         for (int i = 0; i < slots.length; i++) {
             slots[i] = new Slot(i);
         }
     }
 
+    /**
+     * This method is used to add items to the vending machine. It takes in an item,
+     * and a slot number to add the item to the slots array. It returns true if the
+     * item was added successfully, and false if the item was not added.
+     * 
+     * @param item    item to be added
+     * @param slotNum slot number to add the item to
+     * @return true if item was added successfully, false if item was not added
+     */
     public boolean addItem(Item item, int slotNum) {
         if (slots[slotNum].addItem(item)) {
             // Print out the slots
@@ -23,6 +40,15 @@ public class VendingMachine {
         }
     }
 
+    /**
+     * This method restocks the items in the vending machine. It creates a new Item
+     * object depending on the user's choice and then adds it to the appropriate
+     * slot.
+     * 
+     * @param choice slot number of the item to restock
+     * @param quantity number of items to restock
+     * @return confirmation message for if the item was restocked
+     */
     public String restockItems(int choice, int quantity) {
         String text = "Error in restocking. ";
         int price = 0, added = 0;
@@ -201,6 +227,13 @@ public class VendingMachine {
         return text;
     }
 
+    /**
+     * Changes the price of an item
+     * 
+     * @param choice  index of the item to change the price of
+     * @param newPrice  the new price of the item
+     * @return a string that tells the user if the price was changed or not
+     */
     public String changePrice(int choice, int newPrice) {
         String name = "";
         // Set name to the name of the item chosen
@@ -249,6 +282,14 @@ public class VendingMachine {
         return name + " price changed to P" + newPrice;
     }
 
+    /**
+     * This method is used to buy an item from the vending machine. Aside from
+     * checking the item exists It checks if the user has enough money to buy the
+     * item.
+     * 
+     * @param slotNum the slot number of the item to be bought
+     * @return a string confirming if the item was bought or not
+     */
     public String buyItem(int slotNum) {
         String text = "";
         money = box.getTotalUserMoney();
@@ -268,6 +309,11 @@ public class VendingMachine {
         return text;
     }
 
+    /**
+     * This method is used to get the transactions of the vending machine
+     * 
+     * @return a string that displays the transactions recorded
+     */
     public String displayTransactions() {
         String text = "";
         text += "+-------------------------------------------------------------------------------------------------------------------------------------------+";
@@ -287,6 +333,10 @@ public class VendingMachine {
         return text;
     }
 
+    /**
+     * This method returns if the vending machine has been restocked or not
+     * @return didRestock value
+     */
     public boolean didRestock() {
         return didRestock;
     }

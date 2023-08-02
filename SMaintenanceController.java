@@ -1,8 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.Action;
-
 public class SMaintenanceController {
     private SMaintenanceView smv;
     private SpecialVendingMachine svm;
@@ -28,23 +26,47 @@ public class SMaintenanceController {
         this.smv.restockItemListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int slotNum = Integer.parseInt(smv.getItemIndex());
-                int quantity = Integer.parseInt(smv.getItemQuantity());
-                if (slotNum <= 6){
-                    smv.foodTextDisplay(svm.restockStandAlones(slotNum, quantity));
-                }
-                else{
-                    smv.foodTextDisplay(svm.restockAddOns(slotNum, quantity));
-                }
+                try {
+                    int slotNum = Integer.parseInt(smv.getItemIndex());
+                    int quantity = Integer.parseInt(smv.getItemQuantity());
+                    if (slotNum <= 0 || quantity <= 0){
+                        smv.foodTextDisplay("Invalid input.");
+                    }
+                    else{
+                        if (slotNum <= 6){
+                            smv.foodTextDisplay(svm.restockStandAlones(slotNum, quantity));
+                            model.getVM().transactions.clearTransactions();
+                        }
+                        else if (slotNum <= 12){
+                            smv.foodTextDisplay(svm.restockAddOns(slotNum, quantity));
+                            model.getVM().transactions.clearTransactions();
+                        }
+                        else{
+                            smv.foodTextDisplay("Invalid input.");
+                        }
+                    }
+                } catch (Exception err) {
+                    smv.foodTextDisplay("Invalid input.");
+                }  
+
             }
         });
 
         this.smv.changePriceListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int slotNum = Integer.parseInt(smv.getItemIndex());
-                int newPrice = Integer.parseInt(smv.getNewPrice());
-                smv.foodTextDisplay(svm.changePrice(slotNum, newPrice));
+                try {
+                    int slotNum = Integer.parseInt(smv.getItemIndex());
+                    int newPrice = Integer.parseInt(smv.getNewPrice());
+                    if (slotNum <= 0 || newPrice < 0){
+                        smv.foodTextDisplay("Invalid input.");
+                    }
+                    else{
+                        smv.foodTextDisplay(model.getVM().changePrice(slotNum, newPrice));
+                    }
+                } catch (Exception err) {
+                    smv.foodTextDisplay("Invalid input.");
+                }
             }
         });
 
@@ -58,9 +80,18 @@ public class SMaintenanceController {
         this.smv.restockMoneyListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                denomination = Integer.parseInt(smv.getDenomination());
-                count = Integer.parseInt(smv.getMoneyQuantity());
-                smv.moneyTextDisplay(svm.box.restockingMoney(denomination, count));;
+                try {
+                    denomination = Integer.parseInt(smv.getDenomination());
+                    count = Integer.parseInt(smv.getMoneyQuantity());
+                    if (count <= 0 || denomination <= 0){
+                        smv.moneyTextDisplay("Invalid input.");
+                    }
+                    else{
+                        smv.moneyTextDisplay(model.getVM().box.restockingMoney(denomination, count));
+                    }
+                } catch (Exception err) {
+                    smv.moneyTextDisplay("Invalid input.");
+                }
             }
         }); 
     
