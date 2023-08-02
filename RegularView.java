@@ -70,19 +70,19 @@ public class RegularView extends JFrame{
                 icon = new ImageIcon(getClass().getResource("icons/sprite.png"));
                 break;
             case 2:
-                string = string +"\nroyal";
+                icon = new ImageIcon(getClass().getResource("icons/royal.png"));
                 break;
             case 3:
                 icon = new ImageIcon(getClass().getResource("icons/diet coke.png"));
                 break;
             case 4:
-                string = string +"\ncheese burger";
+                icon = new ImageIcon(getClass().getResource("icons/cheeseburger.png"));
                 break;
             case 5:
-                string = string +"\nchicken burger";
+                icon = new ImageIcon(getClass().getResource("icons/chicken burger.png"));
                 break;
             case 6:
-                string = string +"\nbacon burger";
+                icon = new ImageIcon(getClass().getResource("icons/bacon burger.png"));
                 break;
             case 7:
                 icon = new ImageIcon(getClass().getResource("icons/fries.png"));

@@ -187,8 +187,9 @@ public class SpecialController {
         this.specialView.cancelListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                specialView.dispenseDisplay(svm.getCart());
-                specialView.moneyDisplay("Balance: P" + svm.box.getTotalUserMoney() + "\n" + svm.clearCartString());
+                specialView.moneyDisplay("Balance: P" + svm.box.getTotalUserMoney() + "\n\n" + svm.clearCartString());
+                specialView.dispenseDisplay(svm.box.dispenseChange()+"\n\n"+svm.getCart());
+                svm.boughtBurger = false;
             }
         });
     }

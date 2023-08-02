@@ -352,7 +352,7 @@ public class SpecialVendingMachine extends VendingMachine {
     public String getCart() {
         // Edit this if you wanna change the text layout.
         if (cart.size() == 0) {
-            return "";
+            return "Cart is empty.";
         } else {
             String text = "Your cart contains: \n";
             for (int i = 0; i < cart.size(); i++) {

@@ -88,7 +88,7 @@ public class SpecialView extends JFrame {
         String string = cal + " cal\nPhp " + price;
         switch(i){
             case 0:
-                string = string + "\nburger";
+                icon = new ImageIcon(getClass().getResource("icons/burger.png"));
                 break;
             case 1:
                 icon = new ImageIcon(getClass().getResource("icons/fries.png"));
