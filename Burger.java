@@ -37,7 +37,12 @@ public class Burger extends Item {
         if (count > 1) {
             return count + " " + name + "s";
         }
-        return "a " + name;
+        if (count == 1) {
+            return "a " + name;
+        }
+        else {
+            return "";
+        }
     }
 
     /**

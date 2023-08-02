@@ -95,6 +95,11 @@ public class MoneyBox {
      */
     public boolean haveChange(int productTotal) {
         int toDispense = totalUserMoney - productTotal;
+
+        if (toDispense < 0) {
+            return false;
+        } 
+
         int[] tempMoney = money;
         int[] tempChange = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
@@ -252,6 +257,11 @@ public class MoneyBox {
      */
     public String restockingMoney(int money, int count) {
         String text = "Error in restocking. ";
+
+        if (count <= 0){
+            return text;
+        }
+
         switch (money) {
             case 1:
                 this.money[0] = this.money[0] + count;
