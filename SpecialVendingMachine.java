@@ -6,9 +6,9 @@ public class SpecialVendingMachine extends VendingMachine {
     private ArrayList<Item> cart = new ArrayList<Item>();
     Slot[] slots = new Slot[12];
     boolean boughtBurger = false;
-    String itemNamesList[] = { "Burger", "Lettuce", "Tomato Slice",
-            "Burger", "Cheese Slice", "Lettuce",
-            "Burger", "Lettuce", "Tomato Slice",
+    String itemNamesList[] = { "Regular Burger", "Fries", "Sundae",
+            "Coke", "Diet coke", "Sprite",
+            "Fried egg", "Lettuce", "Tomato Slice",
             "Cheese Slice", "Bacon Strip", "Pickle Slice" };
 
     public SpecialVendingMachine() {
@@ -28,6 +28,7 @@ public class SpecialVendingMachine extends VendingMachine {
 
     @Override
     public String displayTransactions() {
+        System.out.println("SIZE" + transactions.getSize());
         String text = "";
         text += "+-------------------------------------------------------------------------------------------------------------------------------------------+";
         text += "\n|                           Item Name                       |         Initital         |     Remaining     |     Sold     |       Total Sales       |";
@@ -369,11 +370,6 @@ public class SpecialVendingMachine extends VendingMachine {
         }
     }
 
-    public String clearCartString() {
-        cart.clear();
-        return "Cart cleared";
-    }
-
     public String getCart() {
         // Edit this if you wanna change the text layout.
         if (cart.size() == 0) {
@@ -395,15 +391,57 @@ public class SpecialVendingMachine extends VendingMachine {
         return total;
     }
 
+    public String cancelCart() {
+        for (int i = 0; i < cart.size(); i++) {
+            if (cart.get(i) instanceof Burger) {
+                Burger b = (Burger) cart.get(i);
+                for (int j = 0; j < b.getAddons().size(); j++) {
+                    if (b.getAddons().get(j).getName().equals("Fried egg")) {
+                        slots[6].addItem(b.getAddons().get(j));
+                    } else if (b.getAddons().get(j).getName().equals("Lettuce")) {
+                        slots[7].addItem(b.getAddons().get(j));
+                    } else if (b.getAddons().get(j).getName().equals("Tomato slice")) {
+                        slots[8].addItem(b.getAddons().get(j));
+                    } else if (b.getAddons().get(j).getName().equals("Cheese slice")) {
+                        slots[9].addItem(b.getAddons().get(j));
+                    } else if (b.getAddons().get(j).getName().equals("Bacon strip")) {
+                        slots[10].addItem(b.getAddons().get(j));
+                    } else if (b.getAddons().get(j).getName().equals("Pickle Slice")) {
+                        slots[11].addItem(b.getAddons().get(j));
+                    }
+                }
+                b.clearAddons();
+            } else {
+                if (cart.get(i).getName().equals("Regular Burger")) {
+                    slots[0].addItem(cart.get(i));
+                } else if (cart.get(i).getName().equals("Fries")) {
+                    slots[1].addItem(cart.get(i));
+                } else if (cart.get(i).getName().equals("Sundae")) {
+                    slots[2].addItem(cart.get(i));
+                } else if (cart.get(i).getName().equals("Coke")) {
+                    slots[3].addItem(cart.get(i));
+                } else if (cart.get(i).getName().equals("Diet Coke")) {
+                    slots[4].addItem(cart.get(i));
+                } else if (cart.get(i).getName().equals("Sprite")) {
+                    slots[5].addItem(cart.get(i));
+                }
+            }
+        }
+        boughtBurger = false;
+        cart.clear();
+        return "Cart cleared.";
+    }
+
     public String buy() {
         String text = "";
+        money = money + box.getTotalUserMoney();
         if (cart.size() == 0) {
             text = "Cart is empty";
         } else {
             if (money < getTotalPrice()) {
                 text = "Insufficient money";
-            } 
-            else if (box.haveChange(getTotalPrice())) {
+            } else if (box.haveChange(getTotalPrice())) {
+
                 money = money - getTotalPrice();
                 text = "You bought: \n";
                 for (int i = 0; i < cart.size(); i++) {
@@ -423,6 +461,7 @@ public class SpecialVendingMachine extends VendingMachine {
                 }
                 cart.clear();
                 text = text + "\n\nDispensing change...";
+                text = text + "\n\nChange dispensed: " + box.getChange(getTotalPrice());
             } else {
                 text = "No change available in the machine.";
             }

@@ -51,13 +51,12 @@ public class SpecialView extends JFrame {
 
     public void addFoodButtons() {
         for (int i = 0; i < 6; i++) {
-            if(vm.slots[i].getNumItems() != 0){
+            if (vm.slots[i].getNumItems() != 0) {
                 FoodButtons[i] = new JButton();
                 FoodButtons(i);
                 FoodButtons[i].setPreferredSize(new Dimension(200, 150));
                 add(FoodButtons[i]);
-            }
-            else{
+            } else {
                 FoodButtons[i] = new JButton("Item Unavailable");
                 FoodButtons[i].setPreferredSize(new Dimension(200, 150));
                 add(FoodButtons[i]);
@@ -67,13 +66,12 @@ public class SpecialView extends JFrame {
 
     public void addOnButtons() {
         for (int i = 6; i < 12; i++) {
-            if(vm.slots[i].getNumItems() != 0){
+            if (vm.slots[i].getNumItems() != 0) {
                 FoodButtons[i] = new JButton();
                 FoodButtons(i);
                 FoodButtons[i].setPreferredSize(new Dimension(200, 150));
                 add(FoodButtons[i]);
-            }
-            else{
+            } else {
                 FoodButtons[i] = new JButton("Item Unavailable");
                 FoodButtons[i].setPreferredSize(new Dimension(200, 150));
                 add(FoodButtons[i]);
@@ -86,7 +84,7 @@ public class SpecialView extends JFrame {
         int price = vm.slots[i].checkSlot().getPrice();
         float cal = vm.slots[i].checkSlot().getCalories();
         String string = cal + " cal\nPhp " + price;
-        switch(i){
+        switch (i) {
             case 0:
                 icon = new ImageIcon(getClass().getResource("icons/burger.png"));
                 break;

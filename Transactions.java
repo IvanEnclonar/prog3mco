@@ -18,6 +18,10 @@ public class Transactions {
         // Nothing to do here
     }
 
+    public int getSize() {
+        return items.size();
+    }
+
     /**
      * Records a transaction in the transactions list
      * 
