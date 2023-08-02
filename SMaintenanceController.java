@@ -30,7 +30,7 @@ public class SMaintenanceController {
             public void actionPerformed(ActionEvent e) {
                 int slotNum = Integer.parseInt(smv.getItemIndex());
                 int quantity = Integer.parseInt(smv.getItemQuantity());
-                if (slotNum < 6){
+                if (slotNum <= 6){
                     smv.foodTextDisplay(svm.restockStandAlones(slotNum, quantity));
                 }
                 else{

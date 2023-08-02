@@ -26,6 +26,26 @@ public class SpecialVendingMachine extends VendingMachine {
         }
     }
 
+    @Override
+    public String displayTransactions() {
+        String text = "";
+        text += "+-------------------------------------------------------------------------------------------------------------------------------------------+";
+        text += "\n|                           Item Name                       |         Initital         |     Remaining     |     Sold     |       Total Sales       |";
+        text += "\n+-------------------------------------------------------------------------------------------------------------------------------------------+";
+
+        for (int i = 0; i < 12; i++) {
+            text += "\n|";
+            text += String.format("\t%s\t\t", itemNamesList[i]);
+            text += String.format("%-25s", (slots[i].getNumItems() + transactions.countItem(itemNamesList[i])));
+            text += String.format("%-20s", slots[i].getNumItems());
+            text += String.format("%-18s", transactions.countItem(itemNamesList[i]));
+            text += String.format("  %-25s", "Php " + transactions.countSales(itemNamesList[i]));
+            text += "|";
+        }
+        text += "\n+-------------------------------------------------------------------------------------------------------------------------------------------+";
+        return text;
+    }
+
     public String restockStandAlones(int choice, int quantity) {
         String text = "Error in restocking. ";
         int price = 0, added = 0;
@@ -157,27 +177,27 @@ public class SpecialVendingMachine extends VendingMachine {
 
         if (slots[choice - 1].getPrice() == "" || slots[choice - 1].getCalories() == "") {
             switch (choice) {
-                case 1:
+                case 7:
                     price = 25;
                     cals = 100;
                     break;
-                case 2:
+                case 8:
                     price = 5;
                     cals = 3;
                     break;
-                case 3:
+                case 9:
                     price = 10;
                     cals = 5;
                     break;
-                case 4:
+                case 10:
                     price = 15;
                     cals = 80;
                     break;
-                case 5:
+                case 11:
                     price = 20;
                     cals = 85;
                     break;
-                case 6:
+                case 12:
                     price = 15;
                     cals = 15;
                     break;
@@ -199,7 +219,7 @@ public class SpecialVendingMachine extends VendingMachine {
                     }
                 }
                 text = "Added " + quantity + " Fried Egg(s) to the inventory\nTotal pcs. in machine: "
-                        + slots[0].getNumItems();
+                        + slots[6].getNumItems();
                 break;
             case 8:
                 Item Lettuce = new Item("Lettuce", price, cals);
@@ -212,7 +232,7 @@ public class SpecialVendingMachine extends VendingMachine {
                     }
                 }
                 text = "Added " + quantity + " Lettuce to the inventory.\nTotal pcs. in machine: "
-                        + slots[1].getNumItems();
+                        + slots[7].getNumItems();
                 break;
             case 9:
                 Item TomatoSlice = new Item("Tomato Slice", price, cals);
@@ -226,7 +246,7 @@ public class SpecialVendingMachine extends VendingMachine {
                     }
                 }
                 text = "Added " + quantity + " Tomato Slice(s) to the inventory.\nTotal pcs. in machine: "
-                        + slots[2].getNumItems();
+                        + slots[8].getNumItems();
                 break;
             case 10:
                 Item CheeseSlice = new Item("Cheese Slice", price, cals);
@@ -240,7 +260,7 @@ public class SpecialVendingMachine extends VendingMachine {
                     }
                 }
                 text = "Added " + quantity + " Cheese Slice(s) to the inventory.\nTotal pcs. in machine: "
-                        + slots[3].getNumItems();
+                        + slots[9].getNumItems();
                 break;
             case 11:
                 Item BaconStrip = new Item("Bacon Strip", price, cals);
@@ -254,7 +274,7 @@ public class SpecialVendingMachine extends VendingMachine {
                     }
                 }
                 text = "Added " + quantity + " Bacon Strip(s) to the inventory.\nTotal pcs. in machine: "
-                        + slots[4].getNumItems();
+                        + slots[10].getNumItems();
                 break;
             case 12:
                 Item PickleSlice = new Item("Pickle Slice", price, cals);
@@ -268,7 +288,7 @@ public class SpecialVendingMachine extends VendingMachine {
                     }
                 }
                 text = "Added " + quantity + " Pickle Slice(s) to the inventory.\nTotal pcs. in machine: "
-                        + slots[5].getNumItems();
+                        + slots[11].getNumItems();
                 break;
             default:
                 break;
