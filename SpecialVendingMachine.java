@@ -6,10 +6,10 @@ public class SpecialVendingMachine extends VendingMachine {
     private ArrayList<Item> cart = new ArrayList<Item>();
     Slot[] slots = new Slot[12];
     boolean boughtBurger = false;
-    String itemNamesList[] = { "Burger", "Lettuce", "Tomato Slice", 
-                                "Burger", "Cheese Slice", "Lettuce",
-                                "Burger", "Lettuce", "Tomato Slice",
-                                "Cheese Slice", "Bacon Strip", "Pickle Slice" };
+    String itemNamesList[] = { "Burger", "Lettuce", "Tomato Slice",
+            "Burger", "Cheese Slice", "Lettuce",
+            "Burger", "Lettuce", "Tomato Slice",
+            "Cheese Slice", "Bacon Strip", "Pickle Slice" };
 
     public SpecialVendingMachine() {
         for (int i = 0; i < slots.length; i++) {
@@ -17,13 +17,22 @@ public class SpecialVendingMachine extends VendingMachine {
         }
     }
 
-    public String restockStandAlones(int choice, int quantity){
+    @Override
+    public boolean addItem(Item item, int slotNum) {
+        if (slots[slotNum].addItem(item)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public String restockStandAlones(int choice, int quantity) {
         String text = "Error in restocking. ";
         int price = 0, added = 0;
         float cals = 0;
 
-        if (slots[choice-1].getPrice() == "" || slots[choice-1].getCalories() == ""){
-            switch (choice){
+        if (slots[choice - 1].getPrice() == "" || slots[choice - 1].getCalories() == "") {
+            switch (choice) {
                 case 1:
                     price = 75;
                     cals = 250;
@@ -49,10 +58,9 @@ public class SpecialVendingMachine extends VendingMachine {
                     cals = 350;
                     break;
             }
-        }
-        else{
-            price = slots[choice-1].checkSlot().getPrice();
-            cals = slots[choice-1].checkSlot().getCalories();
+        } else {
+            price = slots[choice - 1].checkSlot().getPrice();
+            cals = slots[choice - 1].checkSlot().getCalories();
         }
 
         switch (choice) {
@@ -61,66 +69,78 @@ public class SpecialVendingMachine extends VendingMachine {
                 for (int i = 0; i < quantity; i++) {
                     if (!addItem(Burger, 0)) {
                         added = quantity - i + 1;
-                        text = "Slot for Burger is full! Added "+added+" Burger(s) to the inventory.\nTotal pcs. in machine: "+slots[0].getNumItems();
+                        text = "Slot for Burger is full! Added " + added
+                                + " Burger(s) to the inventory.\nTotal pcs. in machine: " + slots[0].getNumItems();
                         break;
                     }
                 }
-                text = "Added "+quantity+" Burger(s) to the inventory\nTotal pcs. in machine: "+slots[0].getNumItems();
+                text = "Added " + quantity + " Burger(s) to the inventory\nTotal pcs. in machine: "
+                        + slots[0].getNumItems();
                 break;
             case 2:
                 Item Fries = new Item("Fries", price, cals);
                 for (int i = 0; i < quantity; i++) {
                     if (!addItem(Fries, 1)) {
                         added = quantity - i + 1;
-                        text = "Slot for Fries is full! Added "+added+" Fries to the inventory.\nTotal pcs. in machine: "+slots[1].getNumItems();
+                        text = "Slot for Fries is full! Added " + added
+                                + " Fries to the inventory.\nTotal pcs. in machine: " + slots[1].getNumItems();
                         break;
                     }
                 }
-                text = "Added "+quantity+" Fries to the inventory.\nTotal pcs. in machine: "+slots[1].getNumItems();
+                text = "Added " + quantity + " Fries to the inventory.\nTotal pcs. in machine: "
+                        + slots[1].getNumItems();
                 break;
             case 3:
                 Item Sundae = new Item("Sundae", price, cals);
                 for (int i = 0; i < quantity; i++) {
                     if (!addItem(Sundae, 2)) {
                         added = quantity - i + 1;
-                        text = "Slot for Sundae is full! Added "+added+" Sundae(s) to the inventory.\nTotal pcs. in machine: "+slots[2].getNumItems();
+                        text = "Slot for Sundae is full! Added " + added
+                                + " Sundae(s) to the inventory.\nTotal pcs. in machine: " + slots[2].getNumItems();
                         break;
                     }
                 }
-                text = "Added "+quantity+" Sundae(s) to the inventory.\nTotal pcs. in machine: "+slots[2].getNumItems();
+                text = "Added " + quantity + " Sundae(s) to the inventory.\nTotal pcs. in machine: "
+                        + slots[2].getNumItems();
                 break;
             case 4:
                 Item Coke = new Item("Coke", price, cals);
                 for (int i = 0; i < quantity; i++) {
                     if (!addItem(Coke, 3)) {
                         added = quantity - i + 1;
-                        text = "Slot for Coke is full! Added "+added+" Coke(s) to the inventory.\nTotal pcs. in machine: "+slots[3].getNumItems();
+                        text = "Slot for Coke is full! Added " + added
+                                + " Coke(s) to the inventory.\nTotal pcs. in machine: " + slots[3].getNumItems();
                         break;
                     }
                 }
-                text = "Added "+quantity+" Coke(s) to the inventory.\nTotal pcs. in machine: "+slots[3].getNumItems();
+                text = "Added " + quantity + " Coke(s) to the inventory.\nTotal pcs. in machine: "
+                        + slots[3].getNumItems();
                 break;
             case 5:
                 Item DietCoke = new Item("Diet Coke", price, cals);
                 for (int i = 0; i < quantity; i++) {
                     if (!addItem(DietCoke, 4)) {
                         added = quantity - i + 1;
-                        text = "Slot for Diet Coke is full! Added "+added+" Diet Coke(s) to the inventory.\nTotal pcs. in machine: "+slots[4].getNumItems();
+                        text = "Slot for Diet Coke is full! Added " + added
+                                + " Diet Coke(s) to the inventory.\nTotal pcs. in machine: " + slots[4].getNumItems();
                         break;
                     }
                 }
-                text = "Added "+quantity+" Diet Coke(s) to the inventory.\nTotal pcs. in machine: "+slots[4].getNumItems();
+                text = "Added " + quantity + " Diet Coke(s) to the inventory.\nTotal pcs. in machine: "
+                        + slots[4].getNumItems();
                 break;
             case 6:
                 Item Sprite = new Item("Sprite", price, cals);
                 for (int i = 0; i < quantity; i++) {
                     if (!addItem(Sprite, 5)) {
                         added = quantity - i + 1;
-                        text = "Slot for Sprite is full! Added "+added+" Sprite(s) to the inventory.\nTotal pcs. in machine: "+slots[5].getNumItems();
+                        text = "Slot for Sprite is full! Added " + added
+                                + " Sprite(s) to the inventory.\nTotal pcs. in machine: " + slots[5].getNumItems();
                         break;
                     }
                 }
-                text = "Added "+quantity+" Sprite(s) to the inventory.\nTotal pcs. in machine: "+slots[5].getNumItems();
+                text = "Added " + quantity + " Sprite(s) to the inventory.\nTotal pcs. in machine: "
+                        + slots[5].getNumItems();
                 break;
             default:
                 break;
@@ -130,13 +150,13 @@ public class SpecialVendingMachine extends VendingMachine {
         return text;
     }
 
-    public String restockAddOns(int choice, int quantity){
+    public String restockAddOns(int choice, int quantity) {
         String text = "Error in restocking. ";
         int price = 0, added = 0;
         float cals = 0;
 
-        if (slots[choice-1].getPrice() == "" || slots[choice-1].getCalories() == ""){
-            switch (choice){
+        if (slots[choice - 1].getPrice() == "" || slots[choice - 1].getCalories() == "") {
+            switch (choice) {
                 case 1:
                     price = 25;
                     cals = 100;
@@ -162,10 +182,9 @@ public class SpecialVendingMachine extends VendingMachine {
                     cals = 15;
                     break;
             }
-        }
-        else{
-            price = slots[choice-1].checkSlot().getPrice();
-            cals = slots[choice-1].checkSlot().getCalories();
+        } else {
+            price = slots[choice - 1].checkSlot().getPrice();
+            cals = slots[choice - 1].checkSlot().getCalories();
         }
 
         switch (choice) {
@@ -174,66 +193,82 @@ public class SpecialVendingMachine extends VendingMachine {
                 for (int i = 0; i < quantity; i++) {
                     if (!addItem(FriedEgg, 6)) {
                         added = quantity - i + 1;
-                        text = "Slot for Fried Egg is full! Added "+added+" Fried Egg(s) to the inventory.\nTotal pcs. in machine: "+slots[6].getNumItems();
+                        text = "Slot for Fried Egg is full! Added " + added
+                                + " Fried Egg(s) to the inventory.\nTotal pcs. in machine: " + slots[6].getNumItems();
                         break;
                     }
                 }
-                text = "Added "+quantity+" Fried Egg(s) to the inventory\nTotal pcs. in machine: "+slots[0].getNumItems();
+                text = "Added " + quantity + " Fried Egg(s) to the inventory\nTotal pcs. in machine: "
+                        + slots[0].getNumItems();
                 break;
             case 8:
                 Item Lettuce = new Item("Lettuce", price, cals);
                 for (int i = 0; i < quantity; i++) {
                     if (!addItem(Lettuce, 7)) {
                         added = quantity - i + 1;
-                        text = "Slot for Lettuce is full! Added "+added+" Lettuce(s) to the inventory.\nTotal pcs. in machine: "+slots[7].getNumItems();
+                        text = "Slot for Lettuce is full! Added " + added
+                                + " Lettuce(s) to the inventory.\nTotal pcs. in machine: " + slots[7].getNumItems();
                         break;
                     }
                 }
-                text = "Added "+quantity+" Lettuce to the inventory.\nTotal pcs. in machine: "+slots[1].getNumItems();
+                text = "Added " + quantity + " Lettuce to the inventory.\nTotal pcs. in machine: "
+                        + slots[1].getNumItems();
                 break;
             case 9:
                 Item TomatoSlice = new Item("Tomato Slice", price, cals);
                 for (int i = 0; i < quantity; i++) {
                     if (!addItem(TomatoSlice, 8)) {
                         added = quantity - i + 1;
-                        text = "Slot for Tomato Slice is full! Added "+added+" Tomato Slice(s) to the inventory.\nTotal pcs. in machine: "+slots[8].getNumItems();
+                        text = "Slot for Tomato Slice is full! Added " + added
+                                + " Tomato Slice(s) to the inventory.\nTotal pcs. in machine: "
+                                + slots[8].getNumItems();
                         break;
                     }
                 }
-                text = "Added "+quantity+" Tomato Slice(s) to the inventory.\nTotal pcs. in machine: "+slots[2].getNumItems();
+                text = "Added " + quantity + " Tomato Slice(s) to the inventory.\nTotal pcs. in machine: "
+                        + slots[2].getNumItems();
                 break;
             case 10:
                 Item CheeseSlice = new Item("Cheese Slice", price, cals);
                 for (int i = 0; i < quantity; i++) {
                     if (!addItem(CheeseSlice, 9)) {
                         added = quantity - i + 1;
-                        text = "Slot for Cheese Slice is full! Added "+added+" Cheese Slice(s) to the inventory.\nTotal pcs. in machine: "+slots[9].getNumItems();
+                        text = "Slot for Cheese Slice is full! Added " + added
+                                + " Cheese Slice(s) to the inventory.\nTotal pcs. in machine: "
+                                + slots[9].getNumItems();
                         break;
                     }
                 }
-                text = "Added "+quantity+" Cheese Slice(s) to the inventory.\nTotal pcs. in machine: "+slots[3].getNumItems();
+                text = "Added " + quantity + " Cheese Slice(s) to the inventory.\nTotal pcs. in machine: "
+                        + slots[3].getNumItems();
                 break;
             case 11:
                 Item BaconStrip = new Item("Bacon Strip", price, cals);
                 for (int i = 0; i < quantity; i++) {
                     if (!addItem(BaconStrip, 10)) {
                         added = quantity - i + 1;
-                        text = "Slot for Bacon Strip is full! Added "+added+" Bacon Strip(s) to the inventory.\nTotal pcs. in machine: "+slots[10].getNumItems();
+                        text = "Slot for Bacon Strip is full! Added " + added
+                                + " Bacon Strip(s) to the inventory.\nTotal pcs. in machine: "
+                                + slots[10].getNumItems();
                         break;
                     }
                 }
-                text = "Added "+quantity+" Bacon Strip(s) to the inventory.\nTotal pcs. in machine: "+slots[4].getNumItems();
+                text = "Added " + quantity + " Bacon Strip(s) to the inventory.\nTotal pcs. in machine: "
+                        + slots[4].getNumItems();
                 break;
             case 12:
                 Item PickleSlice = new Item("Pickle Slice", price, cals);
                 for (int i = 0; i < quantity; i++) {
                     if (!addItem(PickleSlice, 11)) {
                         added = quantity - i + 1;
-                        text = "Slot for Pickle Slice is full! Added "+added+" Pickle Slice(s) to the inventory.\nTotal pcs. in machine: "+slots[11].getNumItems();
+                        text = "Slot for Pickle Slice is full! Added " + added
+                                + " Pickle Slice(s) to the inventory.\nTotal pcs. in machine: "
+                                + slots[11].getNumItems();
                         break;
                     }
                 }
-                text = "Added "+quantity+" Pickle Slice(s) to the inventory.\nTotal pcs. in machine: "+slots[5].getNumItems();
+                text = "Added " + quantity + " Pickle Slice(s) to the inventory.\nTotal pcs. in machine: "
+                        + slots[5].getNumItems();
                 break;
             default:
                 break;
@@ -280,6 +315,8 @@ public class SpecialVendingMachine extends VendingMachine {
                         return "Frying bacon... Added to cart.";
                     case 11:
                         return "Slicing pickle... Added to cart.";
+                    default:
+                        return "Error";
                 }
             }
         } else {
