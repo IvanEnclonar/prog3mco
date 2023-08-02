@@ -376,6 +376,7 @@ public class SpecialVendingMachine extends VendingMachine {
             for (int i = 0; i < cart.size(); i++) {
                 text = text + cart.get(i).getName() + "\n";
             }
+            text = text + "\nTotal price: " + getTotalPrice() + " | " + "Total calories: " + getTotalCalories();
             return text;
         }
     }
@@ -384,6 +385,14 @@ public class SpecialVendingMachine extends VendingMachine {
         int total = 0;
         for (int i = 0; i < cart.size(); i++) {
             total = total + cart.get(i).getPrice();
+        }
+        return total;
+    }
+
+    public float getTotalCalories() {
+        float total = 0;
+        for (int i = 0; i < cart.size(); i++) {
+            total = total + cart.get(i).getCalories();
         }
         return total;
     }
