@@ -16,30 +16,28 @@ public class SpecialView extends JFrame {
     public SpecialView(VendingMachine vm) {
         super("Special Vending Machine");
         this.vm = (SpecialVendingMachine) vm;
-        setSize(630, 1075);
+        setSize(630, 1025);
         setResizable(false);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(new FlowLayout());
 
         addFoodButtons();
 
-        add(Box.createRigidArea(new Dimension(600, 10)));
         add(Box.createRigidArea(new Dimension(250, 10)));
         add(addOns);
         add(Box.createRigidArea(new Dimension(250, 10)));
         addOnButtons();
 
-        add(Box.createRigidArea(new Dimension(600, 15)));
         add(Box.createRigidArea(new Dimension(250, 10)));
         add(insertMoney);
         add(Box.createRigidArea(new Dimension(250, 10)));
         MoneyButtons();
 
-        add(Box.createRigidArea(new Dimension(600, 15)));
+        add(Box.createRigidArea(new Dimension(600, 5)));
 
         Display();
 
-        add(Box.createRigidArea(new Dimension(600, 15)));
+        add(Box.createRigidArea(new Dimension(600, 5)));
 
         confirmPurchase = new JButton("Confirm purchase");
         confirmPurchase.setPreferredSize(new Dimension(600, 30));
@@ -56,12 +54,12 @@ public class SpecialView extends JFrame {
             if(vm.slots[i].getNumItems() != 0){
                 FoodButtons[i] = new JButton();
                 FoodButtons(i);
-                FoodButtons[i].setPreferredSize(new Dimension(200, 175));
+                FoodButtons[i].setPreferredSize(new Dimension(200, 150));
                 add(FoodButtons[i]);
             }
             else{
                 FoodButtons[i] = new JButton("Item Unavailable");
-                FoodButtons[i].setPreferredSize(new Dimension(200, 175));
+                FoodButtons[i].setPreferredSize(new Dimension(200, 150));
                 add(FoodButtons[i]);
             }
         }
@@ -72,12 +70,12 @@ public class SpecialView extends JFrame {
             if(vm.slots[i].getNumItems() != 0){
                 FoodButtons[i] = new JButton();
                 FoodButtons(i);
-                FoodButtons[i].setPreferredSize(new Dimension(200, 175));
+                FoodButtons[i].setPreferredSize(new Dimension(200, 150));
                 add(FoodButtons[i]);
             }
             else{
                 FoodButtons[i] = new JButton("Item Unavailable");
-                FoodButtons[i].setPreferredSize(new Dimension(200, 175));
+                FoodButtons[i].setPreferredSize(new Dimension(200, 150));
                 add(FoodButtons[i]);
             }
         }
