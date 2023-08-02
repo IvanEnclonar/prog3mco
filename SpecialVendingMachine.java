@@ -1,5 +1,12 @@
 import java.util.ArrayList;
 
+/**
+ * This class represents a special vending machine that can serve addons which
+ * is only available if you buy a burger. The addons modify the burger and its
+ * properties. This class extends the VendingMachine class so it possesses all
+ * the behaviorsof a regular vending machine but with additional features and
+ * slightmodifications.
+ */
 public class SpecialVendingMachine extends VendingMachine {
     private ArrayList<Item> cart = new ArrayList<Item>();
     Slot[] slots = new Slot[12];
@@ -9,12 +16,24 @@ public class SpecialVendingMachine extends VendingMachine {
             "Fried egg", "Lettuce", "Tomato slice",
             "Cheese slice", "Bacon strip", "Pickle slice" };
 
+    /**
+     * Constructor for SpecialVendingMachine. Initializes the slots array.
+     */
     public SpecialVendingMachine() {
         for (int i = 0; i < slots.length; i++) {
             slots[i] = new Slot(i);
         }
     }
 
+    /**
+     * Adds an item to the slots array. If the slot is empty, the item is added to
+     * the slot. If the slot is not empty and the item is the same type as the item
+     * already in the slot, the item is added if the slot is not full.
+     * 
+     * @param item    The item to be added to the slot
+     * @param slotNum The slot number where the item will be added
+     * @return true if the item was added, false otherwise
+     */
     @Override
     public boolean addItem(Item item, int slotNum) {
         if (slots[slotNum].addItem(item)) {
@@ -24,6 +43,13 @@ public class SpecialVendingMachine extends VendingMachine {
         }
     }
 
+    /**
+     * Displays the transactions made in the vending machine. This functions returns
+     * a string that will be displayed in the GUI.
+     * 
+     * @return A string the contains the transactions made in the vending machine in
+     *         a table format.
+     */
     @Override
     public String displayTransactions() {
         String text = "";
@@ -44,6 +70,15 @@ public class SpecialVendingMachine extends VendingMachine {
         return text;
     }
 
+    /**
+     * This function restocks the stand alone items in the vending machine like
+     * burger, fries, sundae, etc. This function returns the status of the
+     * restocking process in a string that will be displayed in the GUI.
+     * 
+     * @param choice   The index of the item to be restocked
+     * @param quantity The number of items to be restocked
+     * @return A string that contains the status of the restocking process.
+     */
     public String restockStandAlones(int choice, int quantity) {
         String text = "Error in restocking. ";
         int price = 0, added = 0;
@@ -168,6 +203,13 @@ public class SpecialVendingMachine extends VendingMachine {
         return text;
     }
 
+    /**
+     * Restocks the add-ons in the machine.
+     * 
+     * @param choice   The choice of add-on to be restocked.
+     * @param quantity The number of items to be restocked.
+     * @return A string that contains the status of the restocking process.
+     */
     public String restockAddOns(int choice, int quantity) {
         String text = "Error in restocking. ";
         int price = 0, added = 0;
@@ -296,6 +338,14 @@ public class SpecialVendingMachine extends VendingMachine {
         return text;
     }
 
+    /**
+     * If the slot is not empty, remove the item from the slot and add it to the
+     * cart arraylist. This function returns a string that tells the user if the
+     * item was added to the cart or not.
+     * 
+     * @param slotNum the slot number of the item to be added to the cart
+     * @return a string that tells the user the status of adding process
+     */
     public String addToCart(int slotNum) {
         if (slots[slotNum].checkSlot() != null) {
             if (slotNum == 0 && boughtBurger == false) {
@@ -367,6 +417,11 @@ public class SpecialVendingMachine extends VendingMachine {
         }
     }
 
+    /**
+     * This function returns a string that tells the user the contents of the cart.
+     * 
+     * @return a string that tells the user the contents of the cart
+     */
     public String getCart() {
         // Edit this if you wanna change the text layout.
         if (cart.size() == 0) {
@@ -376,11 +431,17 @@ public class SpecialVendingMachine extends VendingMachine {
             for (int i = 0; i < cart.size(); i++) {
                 text = text + cart.get(i).getName() + "\n";
             }
-            text = text + "\nTotal price: " + getTotalPrice() + " | " + "Total calories: " + getTotalCalories();
+            text = text + "\nTotal price: P" + getTotalPrice() + " | " + "Total calories: " + getTotalCalories();
             return text;
         }
     }
 
+    /**
+     * This function returns an integer that tells the user the total price of the
+     * items in the cart. This function also considers the addons of the burger.
+     * 
+     * @return the total price of the items in the cart
+     */
     public int getTotalPrice() {
         int total = 0;
         for (int i = 0; i < cart.size(); i++) {
@@ -389,6 +450,12 @@ public class SpecialVendingMachine extends VendingMachine {
         return total;
     }
 
+    /**
+     * This function returns a float that tells the user the total calories of the
+     * items in the cart. This function also considers the addons of the burger.
+     * 
+     * @return the total calories of the items in the cart
+     */
     public float getTotalCalories() {
         float total = 0;
         for (int i = 0; i < cart.size(); i++) {
@@ -397,39 +464,56 @@ public class SpecialVendingMachine extends VendingMachine {
         return total;
     }
 
+    /**
+     * This function empties the cart and returns the items to their respective
+     * slots.
+     * 
+     * @return a string that tells the user that the cart has been emptied
+     */
     public String cancelCart() {
         for (int i = 0; i < cart.size(); i++) {
             if (cart.get(i) instanceof Burger) {
                 Burger b = (Burger) cart.get(i);
                 for (int j = 0; j < b.getAddons().size(); j++) {
                     if (b.getAddons().get(j).getName().equals("Fried egg")) {
-                        slots[6].addItem(b.getAddons().get(j));
+                        slots[6].addItem(new Addons(b.getAddons().get(j).getName(), b.getAddons().get(j).getPrice(),
+                                b.getAddons().get(j).getCalories()));
                     } else if (b.getAddons().get(j).getName().equals("Lettuce")) {
-                        slots[7].addItem(b.getAddons().get(j));
+                        slots[7].addItem(new Addons(b.getAddons().get(j).getName(), b.getAddons().get(j).getPrice(),
+                                b.getAddons().get(j).getCalories()));
                     } else if (b.getAddons().get(j).getName().equals("Tomato slice")) {
-                        slots[8].addItem(b.getAddons().get(j));
+                        slots[8].addItem(new Addons(b.getAddons().get(j).getName(), b.getAddons().get(j).getPrice(),
+                                b.getAddons().get(j).getCalories()));
                     } else if (b.getAddons().get(j).getName().equals("Cheese slice")) {
-                        slots[9].addItem(b.getAddons().get(j));
+                        slots[9].addItem(new Addons(b.getAddons().get(j).getName(), b.getAddons().get(j).getPrice(),
+                                b.getAddons().get(j).getCalories()));
                     } else if (b.getAddons().get(j).getName().equals("Bacon strip")) {
-                        slots[10].addItem(b.getAddons().get(j));
+                        slots[10].addItem(new Addons(b.getAddons().get(j).getName(), b.getAddons().get(j).getPrice(),
+                                b.getAddons().get(j).getCalories()));
                     } else if (b.getAddons().get(j).getName().equals("Pickle Slice")) {
-                        slots[11].addItem(b.getAddons().get(j));
+                        slots[11].addItem(new Addons(b.getAddons().get(j).getName(), b.getAddons().get(j).getPrice(),
+                                b.getAddons().get(j).getCalories()));
                     }
                 }
                 b.clearAddons();
+                slots[0].addItem(new Item(cart.get(i).getName(), cart.get(i).getPrice(),
+                        cart.get(i).getCalories()));
             } else {
-                if (cart.get(i).getName().equals("Regular Burger")) {
-                    slots[0].addItem(cart.get(i));
-                } else if (cart.get(i).getName().equals("Fries")) {
-                    slots[1].addItem(cart.get(i));
+                if (cart.get(i).getName().equals("Fries")) {
+                    slots[1].addItem(new Item(cart.get(i).getName(), cart.get(i).getPrice(),
+                            cart.get(i).getCalories()));
                 } else if (cart.get(i).getName().equals("Sundae")) {
-                    slots[2].addItem(cart.get(i));
+                    slots[2].addItem(new Item(cart.get(i).getName(), cart.get(i).getPrice(),
+                            cart.get(i).getCalories()));
                 } else if (cart.get(i).getName().equals("Coke")) {
-                    slots[3].addItem(cart.get(i));
+                    slots[3].addItem(new Item(cart.get(i).getName(), cart.get(i).getPrice(),
+                            cart.get(i).getCalories()));
                 } else if (cart.get(i).getName().equals("Diet Coke")) {
-                    slots[4].addItem(cart.get(i));
+                    slots[4].addItem(new Item(cart.get(i).getName(), cart.get(i).getPrice(),
+                            cart.get(i).getCalories()));
                 } else if (cart.get(i).getName().equals("Sprite")) {
-                    slots[5].addItem(cart.get(i));
+                    slots[5].addItem(new Item(cart.get(i).getName(), cart.get(i).getPrice(),
+                            cart.get(i).getCalories()));
                 }
             }
         }
@@ -438,6 +522,16 @@ public class SpecialVendingMachine extends VendingMachine {
         return "Cart cleared.";
     }
 
+    /**
+     * This function buys the items in the cart. If the user does not have enough
+     * money, the function will return a string that tells the user that he/she does
+     * not have enough money. If theuser has enough money, and the machine has
+     * enough change, the function willreturn a string that tells the user what
+     * he/she bought and will clear the cart. This also records allitems bought in
+     * the transaction log.
+     * 
+     * @return a string that tells the user the status of the transaction.
+     */
     public String buy() {
         String text = "";
         money = money + box.getTotalUserMoney();
@@ -463,7 +557,6 @@ public class SpecialVendingMachine extends VendingMachine {
                         transactions.recordTransaction(cart.get(i));
                         text += cart.get(i).getName() + "\n ";
                     }
-                    // Edit this after
                 }
                 boughtBurger = false;
                 cart.clear();
