@@ -1,3 +1,8 @@
+/**
+ * This class is used to keep track of the bills and coins in the vending
+ * machine. It is also used to check if the user has inserted enough money to
+ * buy an item, and to return change to the user.
+ */
 public class MoneyBox {
     // Instance variables
     private int[] money = { 0, 0, 0, 0, 0, 0, 0, 0, 0 }; // The bills and coins that the machine has in 1 5 10 20 50 100
@@ -7,9 +12,18 @@ public class MoneyBox {
                                                           // money.
     private int totalUserMoney = 0; // The total amount of money that the user has inserted into the machine.
 
+    /**
+     * Constructor for MoneyBox
+     */
     public MoneyBox() {
     }
 
+    /**
+     * Inserts money into the vending machine
+     * 
+     * @param i the denomination to be inserted
+     * @return text to be displayed in the vending machine's money display
+     */
     public String insertMoney(int i){
         String text = "";
         switch (i) {
@@ -72,6 +86,13 @@ public class MoneyBox {
         return text;
     }
 
+
+    /**
+     * Checks if there is enough change in the machine to dispense to the user.
+     * 
+     * @param productTotal The total cost of the product that the user wants to buy
+     * @return true if there is enough change, false if there is not enough change
+     */
     public boolean haveChange(int productTotal) {
         int toDispense = totalUserMoney - productTotal;
         int[] tempMoney = money;
@@ -132,9 +153,11 @@ public class MoneyBox {
         }
     }
 
+    /**
+     * Dispenses the change to the user.
+     */
     public String dispenseChange() {
         String text = "Change: ";
-
         // Loop through money array and dispense the change, decrement corresponding
         // denomination in money array
         for (int i = 0; i < 9; i++) {
@@ -195,6 +218,11 @@ public class MoneyBox {
         return text;
     }
 
+    /**
+     * Collects all the money in this MoneyBox
+     * 
+     * @return confirmation message if money is collected or not
+     */
     public String collectMoney() {
         String text = "";
         int count = 0;
@@ -215,6 +243,13 @@ public class MoneyBox {
         return text;
     }
 
+    /**
+     * Adds to the money array given denomination and number to
+     * add
+     * 
+     * @param money denomination of money to add
+     * @param count number of money to add
+     */
     public String restockingMoney(int money, int count) {
         String text = "Error in restocking. ";
         switch (money) {
@@ -261,14 +296,31 @@ public class MoneyBox {
         return text;
     }
 
+    /**
+     * Returns the content of a element in the money array
+     * 
+     * @param index of element to be returned
+     * @return the content of the element
+     */
     public int getMoney(int i) {
         return this.money[i];
     }
 
+    /**
+     * Returns the content of a element in the change array
+     * 
+     * @param index of element to be returned
+     * @return the content of the element
+     */
     public int getChange(int i){
         return this.change[i];
     }
 
+    /**
+     * Returns the money that the user has
+     * 
+     * @return totalUserMoney
+     */
     public int getTotalUserMoney() {
         return totalUserMoney;
     }
