@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import javax.swing.text.Style;
+
 /**
  * This class is used to record transactions made by the vending machine.
  * It is used to keep track of the number of items sold and the total sales
