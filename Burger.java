@@ -114,8 +114,8 @@ public class Burger extends Item {
                     this.name = this.name + checkPlural("Pickle slice", checkNumberofAddons("Pickle slice"))
                             + ", ";
                 }
-                if (exists("Toast")) {
-                    this.name = this.name + checkPlural("Toast", checkNumberofAddons("Toast"))
+                if (exists("Fried Egg")) {
+                    this.name = this.name + checkPlural("Fried Egg", checkNumberofAddons("Fried Egg"))
                             + ", ";
                 }
                 return this.name;
