@@ -13,38 +13,41 @@ public class SpecialVendingMachine extends VendingMachine {
         }
     }
 
-    public boolean addToCart(Item item, int slotNum) {
-        if (item instanceof Addons) {
-            if (boughtBurger) {
-                slots[slotNum].removeItem();
-                cart.add(item);
-                return true;
-            } else {
-                return false;
-            }
-        } else if (item instanceof Burger) {
-            if (boughtBurger) {
-                return false;
-            } else {
-                slots[slotNum].removeItem();
-                cart.add(item);
+    public String addToCart(int slotNum) {
+        if (slots[slotNum].checkSlot() != null) {
+            if (slotNum == 0 && boughtBurger == false) {
+                cart.add(slots[slotNum].removeItem());
                 boughtBurger = true;
-                return true;
+                return "Added to cart";
+            } else if (slotNum == 0 && boughtBurger == true) {
+                return "You can only buy one burger";
+            } else if (slotNum >= 6 && boughtBurger == false) {
+                return "You need to buy a burger first";
+            } else {
+                cart.add(slots[slotNum].removeItem());
+                return "Added to cart";
             }
         } else {
-            slots[slotNum].removeItem();
-            cart.add(item);
-            return true;
+            return "Slot is empty";
         }
+    }
+
+    public String clearCartString() {
+        cart.clear();
+        return "Cart cleared";
     }
 
     public String getCart() {
         // Edit this if you wanna change the text layout.
-        String text = "";
-        for (int i = 0; i < cart.size(); i++) {
-            text = text + cart.get(i).getName() + "\n";
+        if (cart.size() == 0) {
+            return "";
+        } else {
+            String text = "Your cart contains: \n";
+            for (int i = 0; i < cart.size(); i++) {
+                text = text + cart.get(i).getName() + "\n";
+            }
+            return text;
         }
-        return text;
     }
 
     public int getTotalPrice() {
@@ -71,7 +74,7 @@ public class SpecialVendingMachine extends VendingMachine {
                     // Edit this after
                 }
                 cart.clear();
-                text = text + "\nDispensing change...";
+                text = text + "\n\nDispensing change...";
             } else {
                 text = "No change available in the machine.";
             }

@@ -1,33 +1,32 @@
-public class Model{
+public class Model {
     private VendingMachine vm = null;
     private boolean special;
 
-    public boolean createRegularVM(){
+    public boolean createRegularVM() {
         vm = new VendingMachine();
         special = false;
         return true;
     }
 
-    public boolean createSpecialVM(){
+    public boolean createSpecialVM() {
         vm = new SpecialVendingMachine();
         special = true;
         return true;
     }
 
-    public boolean vmExists(){
-        if(vm == null){
+    public boolean vmExists() {
+        if (vm == null) {
             return false;
-        }
-        else{
+        } else {
             return true;
         }
     }
 
-    public boolean isSpecial(){
+    public boolean isSpecial() {
         return special;
     }
 
-    public VendingMachine getVM(){
+    public VendingMachine getVM() {
         return vm;
     }
 }
