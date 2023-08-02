@@ -431,7 +431,7 @@ public class SpecialVendingMachine extends VendingMachine {
             for (int i = 0; i < cart.size(); i++) {
                 text = text + cart.get(i).getName() + "\n";
             }
-            text = text + "\nTotal price: " + getTotalPrice() + " | " + "Total calories: " + getTotalCalories();
+            text = text + "\nTotal price: P" + getTotalPrice() + " | " + "Total calories: " + getTotalCalories();
             return text;
         }
     }
@@ -476,33 +476,44 @@ public class SpecialVendingMachine extends VendingMachine {
                 Burger b = (Burger) cart.get(i);
                 for (int j = 0; j < b.getAddons().size(); j++) {
                     if (b.getAddons().get(j).getName().equals("Fried egg")) {
-                        slots[6].addItem(b.getAddons().get(j));
+                        slots[6].addItem(new Addons(b.getAddons().get(j).getName(), b.getAddons().get(j).getPrice(),
+                                b.getAddons().get(j).getCalories()));
                     } else if (b.getAddons().get(j).getName().equals("Lettuce")) {
-                        slots[7].addItem(b.getAddons().get(j));
+                        slots[7].addItem(new Addons(b.getAddons().get(j).getName(), b.getAddons().get(j).getPrice(),
+                                b.getAddons().get(j).getCalories()));
                     } else if (b.getAddons().get(j).getName().equals("Tomato slice")) {
-                        slots[8].addItem(b.getAddons().get(j));
+                        slots[8].addItem(new Addons(b.getAddons().get(j).getName(), b.getAddons().get(j).getPrice(),
+                                b.getAddons().get(j).getCalories()));
                     } else if (b.getAddons().get(j).getName().equals("Cheese slice")) {
-                        slots[9].addItem(b.getAddons().get(j));
+                        slots[9].addItem(new Addons(b.getAddons().get(j).getName(), b.getAddons().get(j).getPrice(),
+                                b.getAddons().get(j).getCalories()));
                     } else if (b.getAddons().get(j).getName().equals("Bacon strip")) {
-                        slots[10].addItem(b.getAddons().get(j));
+                        slots[10].addItem(new Addons(b.getAddons().get(j).getName(), b.getAddons().get(j).getPrice(),
+                                b.getAddons().get(j).getCalories()));
                     } else if (b.getAddons().get(j).getName().equals("Pickle Slice")) {
-                        slots[11].addItem(b.getAddons().get(j));
+                        slots[11].addItem(new Addons(b.getAddons().get(j).getName(), b.getAddons().get(j).getPrice(),
+                                b.getAddons().get(j).getCalories()));
                     }
                 }
                 b.clearAddons();
+                slots[0].addItem(new Item(cart.get(i).getName(), cart.get(i).getPrice(),
+                        cart.get(i).getCalories()));
             } else {
-                if (cart.get(i).getName().equals("Regular Burger")) {
-                    slots[0].addItem(cart.get(i));
-                } else if (cart.get(i).getName().equals("Fries")) {
-                    slots[1].addItem(cart.get(i));
+                if (cart.get(i).getName().equals("Fries")) {
+                    slots[1].addItem(new Item(cart.get(i).getName(), cart.get(i).getPrice(),
+                            cart.get(i).getCalories()));
                 } else if (cart.get(i).getName().equals("Sundae")) {
-                    slots[2].addItem(cart.get(i));
+                    slots[2].addItem(new Item(cart.get(i).getName(), cart.get(i).getPrice(),
+                            cart.get(i).getCalories()));
                 } else if (cart.get(i).getName().equals("Coke")) {
-                    slots[3].addItem(cart.get(i));
+                    slots[3].addItem(new Item(cart.get(i).getName(), cart.get(i).getPrice(),
+                            cart.get(i).getCalories()));
                 } else if (cart.get(i).getName().equals("Diet Coke")) {
-                    slots[4].addItem(cart.get(i));
+                    slots[4].addItem(new Item(cart.get(i).getName(), cart.get(i).getPrice(),
+                            cart.get(i).getCalories()));
                 } else if (cart.get(i).getName().equals("Sprite")) {
-                    slots[5].addItem(cart.get(i));
+                    slots[5].addItem(new Item(cart.get(i).getName(), cart.get(i).getPrice(),
+                            cart.get(i).getCalories()));
                 }
             }
         }
