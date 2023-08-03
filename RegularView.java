@@ -15,7 +15,7 @@ public class RegularView extends JFrame {
         super("Regular Vending Machine");
         this.vm = vm;
         setSize(630, 1000);
-        setResizable(true);
+        setResizable(false);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(new FlowLayout());
 

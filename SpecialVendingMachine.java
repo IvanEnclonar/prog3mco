@@ -496,7 +496,7 @@ public class SpecialVendingMachine extends VendingMachine {
                     }
                 }
                 b.clearAddons();
-                slots[0].addItem(new Item(cart.get(i).getName(), cart.get(i).getPrice(),
+                slots[0].addItem(new Burger(cart.get(i).getPrice(),
                         cart.get(i).getCalories()));
             } else {
                 if (cart.get(i).getName().equals("Fries")) {
