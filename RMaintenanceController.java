@@ -27,6 +27,12 @@ public class RMaintenanceController {
                     if (slotNum <= 0 || quantity <= 0){
                         rmv.foodTextDisplay("Invalid input.");
                     }
+                    else if (model.getVM().slots[slotNum-1].getNumItems() == 10){
+                        rmv.foodTextDisplay("Slot is already full.");
+                    }
+                    else if (quantity+model.getVM().slots[slotNum-1].getNumItems() > 10){
+                        rmv.foodTextDisplay("Restock quantity exceeds slot capacity.");
+                    }
                     else{
                         rmv.foodTextDisplay(model.getVM().restockItems(slotNum, quantity));
                         model.getVM().transactions.clearTransactions();

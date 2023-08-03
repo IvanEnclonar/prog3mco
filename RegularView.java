@@ -58,7 +58,6 @@ public class RegularView extends JFrame {
     }
 
     public void FoodButtons(int i) {
-        Icon icon = null;
         int price = vm.slots[i].checkSlot().getPrice();
         float cal = vm.slots[i].checkSlot().getCalories();
         String string = cal + " cal\nPhp " + price;

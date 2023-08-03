@@ -30,6 +30,12 @@ public class SMaintenanceController {
                     if (slotNum <= 0 || quantity <= 0){
                         smv.foodTextDisplay("Invalid input.");
                     }
+                    else if (svm.slots[slotNum-1].getNumItems() == 10){
+                        smv.foodTextDisplay("Slot is already full.");
+                    }
+                    else if (quantity+svm.slots[slotNum-1].getNumItems() > 10){
+                        smv.foodTextDisplay("Restock quantity will exceed slot capacity.");
+                    }
                     else{
                         if (slotNum <= 6){
                             smv.foodTextDisplay(svm.restockStandAlones(slotNum, quantity));
