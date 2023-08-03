@@ -2,20 +2,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class RegularView extends JFrame{
+public class RegularView extends JFrame {
     private JButton[] FoodButtons = new JButton[9];
     private JButton money1, money5, money10,
-                    money20, money50, money100,
-                    money200, money500, money1k, dispenseMoney;
+            money20, money50, money100,
+            money200, money500, money1k, dispenseMoney;
     private JLabel moneyLabel = new JLabel("Insert Money");
     private JTextArea dispense, money;
     private VendingMachine vm;
 
-    public RegularView(VendingMachine vm){
+    public RegularView(VendingMachine vm) {
         super("Regular Vending Machine");
         this.vm = vm;
         setSize(630, 1000);
-        setResizable(false);
+        setResizable(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(new FlowLayout());
 
@@ -41,15 +41,14 @@ public class RegularView extends JFrame{
         setVisible(true);
     }
 
-    public void itemButtons(){
-        for(int i = 0; i < 9; i++){
-            if(vm.slots[i].getNumItems() != 0){
+    public void itemButtons() {
+        for (int i = 0; i < 9; i++) {
+            if (vm.slots[i].getNumItems() != 0) {
                 FoodButtons[i] = new JButton();
                 FoodButtons(i);
                 FoodButtons[i].setPreferredSize(new Dimension(200, 175));
                 add(FoodButtons[i]);
-            }
-            else{
+            } else {
                 FoodButtons[i] = new JButton(getIcon(i));
                 FoodButtons[i].setPreferredSize(new Dimension(200, 175));
                 add(FoodButtons[i]);
@@ -58,7 +57,7 @@ public class RegularView extends JFrame{
         }
     }
 
-    public void FoodButtons(int i){
+    public void FoodButtons(int i) {
         Icon icon = null;
         int price = vm.slots[i].checkSlot().getPrice();
         float cal = vm.slots[i].checkSlot().getCalories();
@@ -69,9 +68,9 @@ public class RegularView extends JFrame{
         FoodButtons[i].setVerticalTextPosition(JButton.BOTTOM);
     }
 
-    public Icon getIcon(int itemIndex){
+    public Icon getIcon(int itemIndex) {
         Icon icon = null;
-        switch(itemIndex){
+        switch (itemIndex) {
             case 0:
                 icon = new ImageIcon(getClass().getResource("icons/coke.png"));
                 break;
@@ -103,7 +102,7 @@ public class RegularView extends JFrame{
         return icon;
     }
 
-    public void MoneyButtons(){
+    public void MoneyButtons() {
         money1 = new JButton("1");
         money1.setPreferredSize(new Dimension(63, 30));
         add(money1);
@@ -141,7 +140,7 @@ public class RegularView extends JFrame{
         add(money1k);
     }
 
-    public void Display(){
+    public void Display() {
         dispense = new JTextArea();
         dispense.setPreferredSize(new Dimension(400, 200));
         add(dispense);
@@ -151,91 +150,91 @@ public class RegularView extends JFrame{
         add(money);
     }
 
-    public void Food0Listener(ActionListener actionListener){
+    public void Food0Listener(ActionListener actionListener) {
         FoodButtons[0].addActionListener(actionListener);
     }
 
-    public void Food1Listener(ActionListener actionListener){
+    public void Food1Listener(ActionListener actionListener) {
         FoodButtons[1].addActionListener(actionListener);
     }
 
-    public void Food2Listener(ActionListener actionListener){
+    public void Food2Listener(ActionListener actionListener) {
         FoodButtons[2].addActionListener(actionListener);
     }
 
-    public void Food3Listener(ActionListener actionListener){
+    public void Food3Listener(ActionListener actionListener) {
         FoodButtons[3].addActionListener(actionListener);
     }
 
-    public void Food4Listener(ActionListener actionListener){
+    public void Food4Listener(ActionListener actionListener) {
         FoodButtons[4].addActionListener(actionListener);
     }
 
-    public void Food5Listener(ActionListener actionListener){
+    public void Food5Listener(ActionListener actionListener) {
         FoodButtons[5].addActionListener(actionListener);
     }
 
-    public void Food6Listener(ActionListener actionListener){
+    public void Food6Listener(ActionListener actionListener) {
         FoodButtons[6].addActionListener(actionListener);
     }
 
-    public void Food7Listener(ActionListener actionListener){
+    public void Food7Listener(ActionListener actionListener) {
         FoodButtons[7].addActionListener(actionListener);
     }
 
-    public void Food8Listener(ActionListener actionListener){
+    public void Food8Listener(ActionListener actionListener) {
         FoodButtons[8].addActionListener(actionListener);
     }
 
-    public void Money1Listener(ActionListener actionListener){
+    public void Money1Listener(ActionListener actionListener) {
         money1.addActionListener(actionListener);
     }
 
-    public void Money5Listener(ActionListener actionListener){
+    public void Money5Listener(ActionListener actionListener) {
         money5.addActionListener(actionListener);
     }
 
-    public void Money10Listener(ActionListener actionListener){
+    public void Money10Listener(ActionListener actionListener) {
         money10.addActionListener(actionListener);
     }
 
-    public void Money20Listener(ActionListener actionListener){
+    public void Money20Listener(ActionListener actionListener) {
         money20.addActionListener(actionListener);
     }
 
-    public void Money50Listener(ActionListener actionListener){
+    public void Money50Listener(ActionListener actionListener) {
         money50.addActionListener(actionListener);
     }
 
-    public void Money100Listener(ActionListener actionListener){
+    public void Money100Listener(ActionListener actionListener) {
         money100.addActionListener(actionListener);
     }
 
-    public void Money200Listener(ActionListener actionListener){
+    public void Money200Listener(ActionListener actionListener) {
         money200.addActionListener(actionListener);
     }
 
-    public void Money500Listener(ActionListener actionListener){
+    public void Money500Listener(ActionListener actionListener) {
         money500.addActionListener(actionListener);
     }
 
-    public void Money1kListener(ActionListener actionListener){
+    public void Money1kListener(ActionListener actionListener) {
         money1k.addActionListener(actionListener);
     }
 
-    public void dispenseDisplay(String text){
+    public void dispenseDisplay(String text) {
         this.dispense.setText(text);
     }
 
-    public void moneyDisplay(String text){
+    public void moneyDisplay(String text) {
         this.money.setText(text);
     }
 
-    public void dispenseMoneyListener(ActionListener actionListener){
+    public void dispenseMoneyListener(ActionListener actionListener) {
         dispenseMoney.addActionListener(actionListener);
     }
 
-    public void DisableButton(int index){
+    public void DisableButton(int index) {
         FoodButtons[index].setEnabled(false);
     }
 }

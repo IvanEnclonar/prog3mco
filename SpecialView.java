@@ -17,7 +17,7 @@ public class SpecialView extends JFrame {
         super("Special Vending Machine");
         this.vm = (SpecialVendingMachine) vm;
         setSize(630, 1025);
-        setResizable(false);
+        setResizable(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(new FlowLayout());
 
@@ -92,7 +92,7 @@ public class SpecialView extends JFrame {
         FoodButtons[i].setVerticalTextPosition(JButton.BOTTOM);
     }
 
-    public Icon getIcon(int itemIndex){
+    public Icon getIcon(int itemIndex) {
         Icon icon = null;
         switch (itemIndex) {
             case 0:
@@ -283,7 +283,7 @@ public class SpecialView extends JFrame {
         this.money.setText(text);
     }
 
-    public void DisableButton(int index){
+    public void DisableButton(int index) {
         FoodButtons[index].setEnabled(false);
     }
 }
