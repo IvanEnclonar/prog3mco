@@ -45,7 +45,7 @@ public class VendingMachine {
      * object depending on the user's choice and then adds it to the appropriate
      * slot.
      * 
-     * @param choice slot number of the item to restock
+     * @param choice   slot number of the item to restock
      * @param quantity number of items to restock
      * @return confirmation message for if the item was restocked
      */
@@ -230,8 +230,8 @@ public class VendingMachine {
     /**
      * Changes the price of an item
      * 
-     * @param choice  index of the item to change the price of
-     * @param newPrice  the new price of the item
+     * @param choice   index of the item to change the price of
+     * @param newPrice the new price of the item
      * @return a string that tells the user if the price was changed or not
      */
     public String changePrice(int choice, int newPrice) {
@@ -335,6 +335,7 @@ public class VendingMachine {
 
     /**
      * This method returns if the vending machine has been restocked or not
+     * 
      * @return didRestock value
      */
     public boolean didRestock() {
