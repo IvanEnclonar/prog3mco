@@ -100,7 +100,10 @@ public class MoneyBox {
             return false;
         } 
 
-        int[] tempMoney = money;
+        int[] tempMoney = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+        for (int i = 0; i < 9; i++){
+            tempMoney[i] = money[i];
+        }
         int[] tempChange = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
         while(toDispense >= 1000 & tempMoney[8] > 0){
